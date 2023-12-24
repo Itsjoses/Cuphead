@@ -14,18 +14,20 @@ export class CupheadIdleState extends CupheadState {
     updateState() {
         const cupheadController = this.cuphead.controller
         if(cupheadController.left == true || cupheadController.right == true){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadRunState(this.cuphead)
         } 
         if(cupheadController.shot == true){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadShotStraightState(this.cuphead)
         }
         if(cupheadController.crouch == true){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadCrouchState(this.cuphead)
         }
     }
 
     update() {
-        console.log("idle");
         this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()

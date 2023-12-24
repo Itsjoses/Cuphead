@@ -1,6 +1,7 @@
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
+import { CupheadJumpState } from "./cupheadJumpState.js";
 import { CupheadRunShotStraightState } from "./cupheadRunShotStraightState.js";
 
 export class CupheadRunState extends CupheadState {
@@ -13,16 +14,17 @@ export class CupheadRunState extends CupheadState {
     updateState() {
         const cupheadController = this.cuphead.controller
         if (cupheadController.left == false && cupheadController.right == false) {
-            console.log("masuk ke idle lagi");
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)
         }
         if(cupheadController.shot == true){
             this.cuphead.currentState = new CupheadRunShotStraightState(this.cuphead)
         }
+        if(cupheadController.jump == true){
+            this.cuphead.currentState = new CupheadJumpState(this.cuphead)
+        }
     }
 
     update() {
-        console.log("run");
         this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()

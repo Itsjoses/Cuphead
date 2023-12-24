@@ -8,7 +8,6 @@ export class CupheadState{
         if (cupheadController.left == true) this.cuphead.transform.velocityX = -this.cuphead.CURR_CHAR_CONF.velocityX
         else if (cupheadController.right == true) this.cuphead.transform.velocityX = this.cuphead.CURR_CHAR_CONF.velocityX
         else this.cuphead.transform.velocityX = 0
-        console.log(this.cuphead.CURR_CHAR_CONF.velocityX);
         this.cuphead.transform.position.x += this.cuphead.transform.velocityX * this.cuphead.GAME.delta
     }
 

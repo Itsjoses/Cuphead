@@ -14,6 +14,7 @@ export class CupheadSprites {
         this.duckIdleSprites = []
         this.duckStandupSprites = []
         this.duckShootSprites = []
+        this.jumpSprites = []
     }
 
     loadImage(url) {
@@ -60,6 +61,12 @@ export class CupheadSprites {
     async duckShootRender(){
         this.duckShootSprites = await this.spriteRender("../../../asset/Cuphead/Duck/Shoot/cuphead_duck_shoot_00",3)
     }
+    async duckShootRender(){
+        this.duckShootSprites = await this.spriteRender("../../../asset/Cuphead/Duck/Shoot/cuphead_duck_shoot_00",3)
+    }
+    async jumpRender(){
+        this.jumpSprites = await this.spriteRender("../../../asset/Cuphead/Jump/Cuphead/cuphead_jump_00",3)
+    }
 
     getIdle(){
         return this.idleSprites
@@ -85,6 +92,9 @@ export class CupheadSprites {
     getDuckShootSprites(){
         return this.duckShootSprites
     }
+    getJumpSprites(){
+        return this.jumpSprites
+    }
 
 
     async renderAllSprites(){
@@ -96,5 +106,6 @@ export class CupheadSprites {
         await this.duckIdleRender()
         await this.duckStandupRender()
         await this.duckShootRender()
+        await this.jumpRender()
     }
 }

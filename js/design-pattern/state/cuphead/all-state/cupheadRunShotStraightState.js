@@ -8,7 +8,6 @@ export class CupheadRunShotStraightState extends CupheadState{
         super(cuphead)
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.runShotStraight
         this.cuphead.sprite = CupheadSprites.getInstace().getRunShotStraight()
-        console.log(this.cuphead.sprite);
     }
 
     updateState(){

@@ -15,11 +15,23 @@ export class Character extends GameObject{
         }
     }
 
+
+    jump(){
+        console.log(this.transform.position.y);
+        console.log(this.controller.jump);
+        if(this.controller.jump == false){
+            this.transform.velocity.y = -(1200 * this.GAME.delta)
+            this.controller.jump = true
+        }
+    }   
+
     groundCollision(){
         this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta
         this.transform.position.y += this.transform.velocity.y
         if(this.transform.position.y  >= GameSetting.GROUND - this.sprite[this.tick].height){
+            console.log("kena tanah");
             this.transform.position.y = GameSetting.GROUND -  this.sprite[this.tick].height
+            this.controller.jump = false
         } 
         else this.transform.position.y = this.transform.position.y
     }
