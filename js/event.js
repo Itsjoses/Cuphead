@@ -10,7 +10,6 @@ function checkUp(){
         if(e.keyCode == GameSetting.K_LEFT) CURRGAME.cuphead.controller.left = false
         if(e.keyCode == GameSetting.K_DOWN) CURRGAME.cuphead.controller.crouch = false
         if(e.keyCode == GameSetting.K_SHOT) CURRGAME.cuphead.controller.shot = false
-        if(e.keyCode == GameSetting.K_DASH) CURRGAME.cuphead.controller.dash = false
     })
 }
 

@@ -17,6 +17,12 @@ export const CUPHEAD_CONF = {
         velocityX: 350,
         velocityY: 0
     },
+    dash:{
+        max: 5,
+        speed: 3,
+        velocityX: 750,
+        velocityY: 0
+    },
     shotStraight:{
         max: 5,
         speed: 3,

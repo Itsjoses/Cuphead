@@ -5,10 +5,13 @@ export class CupheadState{
 
     updateTransform() {
         const cupheadController = this.cuphead.controller
-        if (cupheadController.left == true) this.cuphead.transform.velocityX = -this.cuphead.CURR_CHAR_CONF.velocityX
-        else if (cupheadController.right == true) this.cuphead.transform.velocityX = this.cuphead.CURR_CHAR_CONF.velocityX
-        else this.cuphead.transform.velocityX = 0
-        this.cuphead.transform.position.x += this.cuphead.transform.velocityX * this.cuphead.GAME.delta
+        if(this.cuphead.controller.dash == true) this.cuphead.transform.position.x += this.cuphead.CURR_CHAR_CONF.velocityX* this.cuphead.GAME.delta
+        else{
+            if (cupheadController.left == true) this.cuphead.transform.velocityX = -this.cuphead.CURR_CHAR_CONF.velocityX
+            else if (cupheadController.right == true) this.cuphead.transform.velocityX = this.cuphead.CURR_CHAR_CONF.velocityX
+            else this.cuphead.transform.velocityX = 0
+            this.cuphead.transform.position.x += this.cuphead.transform.velocityX * this.cuphead.GAME.delta
+        }
     }
 
     updateFrame(){

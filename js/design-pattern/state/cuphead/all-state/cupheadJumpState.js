@@ -20,22 +20,13 @@ export class CupheadJumpState extends CupheadState {
                 this.cuphead.currentState = new CupheadShotStraightState(this.cuphead)
             }
             if(cupheadController.shot == true)this.cuphead.currentState = new CupheadShotStraightState(this.cuphead)
-            if(cupheadController.crouch == true) this.cuphead.currentState = new CupheadCrouchState(this.cuphead)
+            if(cupheadController.crouch == true) this.cuphead.currentStsate = new CupheadCrouchState(this.cuphead)
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)
             
         }
-        // const cupheadController = this.cuphead.controller
-        // if (cupheadController.left == false && cupheadController.right == false) {
-        //     console.log("masuk ke idle lagi");
-        //     this.cuphead.currentState = new CupheadIdleState(this.cuphead)
-        // }
-        // if(cupheadController.shot == true){
-        //     this.cuphead.currentState = new CupheadRunShotStraightState(this.cuphead)
-        // }
     }
 
     update() {
-        console.log("ini jump");
         this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()
