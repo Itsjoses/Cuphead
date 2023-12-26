@@ -9,12 +9,11 @@ export class CupheadDashState extends CupheadState {
     constructor(cuphead) {
         super(cuphead)
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
-        this.cuphead.sprite = CupheadSprites.getInstace().getDashSprites()
+        this.cuphead.sprite = CupheadSprites.getInstace().getDashAirSprites()
     }
 
     updateState() {
         console.log("ini masih true",this.cuphead.controller.dash );
-        // console.log("ini position x :",this.cuphead.transform.position.x,"ini width canvas :", this.cuphead.sprite[this.cuphead.tick].width);
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
             console.log("masuk ke idle");
             this.cuphead.controller.dash = false
@@ -51,21 +50,11 @@ export class CupheadDashState extends CupheadState {
             currentSprite.width,
             currentSprite.height
         );
-        // const rectWidth = currentSprite.width;
-        // const rectHeight = currentSprite.height;
-        
-        // // Draw a rectangle around the character (adjust dimensions as needed)
-        // ctx.beginPath();
-        // ctx.strokeStyle = 'red'; // Set the stroke color
-        // ctx.lineWidth = 2; // Set the line width 
-        // ctx.rect(
-        //     -(currentSprite.width/2),   // Adjusted this line
-        //     -rectHeight / 2,
-        //     rectWidth,
-        //     rectHeight
-        // );
-        // ctx.stroke();
         ctx.restore();
+    }
+
+    groundColiision(){
+
     }
 
     update() {
@@ -73,6 +62,6 @@ export class CupheadDashState extends CupheadState {
         this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()
-        this.cuphead.groundCollision()
+        this.groundCollision()
     }
 } 

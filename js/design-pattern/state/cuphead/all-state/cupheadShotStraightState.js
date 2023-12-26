@@ -2,6 +2,7 @@ import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
 import { CupheadCrouchState } from "./cupheadCrouchState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
+import { CupheadJumpState } from "./cupheadJumpState.js";
 import {  CupheadRunShotStraightState } from "./cupheadRunShotStraightState.js";
 
 export class CupheadShotStraightState extends CupheadState{
@@ -24,17 +25,15 @@ export class CupheadShotStraightState extends CupheadState{
         if(cupheadController.crouch == true){
             this.cuphead.currentState = new CupheadCrouchState(this.cuphead)
         }
+        if(cupheadController.jump == true){
+            this.cuphead.tick = 0
+            this.cuphead.currentState = new CupheadJumpState(this.cuphead)
+        }
     }
-
-    updateFrame(){
-        const currentSprite =  this.cuphead.sprite[this.cuphead.tick]
-        this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
-    }
-
     update() {
+        this.updateFrame()
         this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
-        this.updateFrame()
     }
 } 

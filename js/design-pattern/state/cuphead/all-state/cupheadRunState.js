@@ -1,5 +1,6 @@
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
+import { CupheadDashState } from "./cupheadDashState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
 import { CupheadJumpState } from "./cupheadJumpState.js";
 import { CupheadRunShotStraightState } from "./cupheadRunShotStraightState.js";
@@ -22,13 +23,19 @@ export class CupheadRunState extends CupheadState {
         if(cupheadController.jump == true){
             this.cuphead.currentState = new CupheadJumpState(this.cuphead)
         }
+        if(cupheadController.dash == true){
+            this.cuphead.tick = 0
+            this.cuphead.currentState = new CupheadDashState(this.cuphead)
+        }
+        
     }
 
     update() {
+        this.updateFrame()
         this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
-        this.updateFrame()
+        this.cuphead.wallCollision()
     }
 } 

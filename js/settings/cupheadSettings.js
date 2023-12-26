@@ -7,7 +7,7 @@ export const CUPHEAD_CONF = {
     },
     run:{
         max: 5,
-        speed: 3,
+        speed: 4,
         velocityX: 350,
         velocityY: 0
     },
@@ -37,7 +37,7 @@ export const CUPHEAD_CONF = {
     },
     crouchNormal:{
         max: 5,
-        speed: 0.5,
+        speed: 3.5,
         velocityX: 0,
         velocityY: 0
     },
@@ -55,7 +55,7 @@ export const CUPHEAD_CONF = {
     },
     crouchStandup:{
         max: 5,
-        speed: 3,
+        speed: 2.5,
         velocityX: 0,
         velocityY: 0
     },

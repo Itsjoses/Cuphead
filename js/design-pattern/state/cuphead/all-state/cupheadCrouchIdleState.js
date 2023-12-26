@@ -3,6 +3,7 @@ import { CupheadState } from "./../cupheadState.js";
 import { CupheadCrouchAttackState } from "./cupheadCrouchAttackState.js";
 import { CupheadCrouchStandupState } from "./cupheadCrouchStandupState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
+import { CupheadJumpState } from "./cupheadJumpState.js";
 
 export class CupheadCrouchIdleState extends CupheadState{
     constructor(cuphead){
@@ -13,19 +14,26 @@ export class CupheadCrouchIdleState extends CupheadState{
 
     updateState(){
         const cupheadController = this.cuphead.controller
-        if(cupheadController.shot == true){
-            this.cuphead.tick = 0
-            this.cuphead.currentState = new CupheadCrouchAttackState(this.cuphead)
+        if(cupheadController.jump == false){
+            if(cupheadController.shot == true){
+                this.cuphead.tick = 0
+                this.cuphead.currentState = new CupheadCrouchAttackState(this.cuphead)
+            }
+            if(cupheadController.crouch == false){
+                this.cuphead.tick = 0
+                this.cuphead.currentState = new CupheadCrouchStandupState(this.cuphead)
+            }
         }
-        if(cupheadController.crouch == false){
-            this.cuphead.currentState = new CupheadCrouchStandupState(this.cuphead)
+        else{
+            this.cuphead.tick = 0
+            this.cuphead.currentState = new CupheadJumpState(this.cuphead)
         }
     }
 
     update(){
+        this.updateFrame()
         this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
-        this.updateFrame()
     }
 } 

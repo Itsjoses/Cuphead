@@ -10,6 +10,7 @@ export class CupheadSprites {
         this.runSprites = []
         this.jumpSprites = []
         this.dashSprites = []
+        this.dashAirSprites = []
         this.shotStraightSprites = []
         this.runShotStraightSprites = []
         this.duckNormalSprites = []
@@ -51,7 +52,7 @@ export class CupheadSprites {
         this.runShotStraightSprites = await this.spriteRender("../../../asset/Cuphead/Run/Shooting/Straight/cuphead_run_shoot_00",16)
     }
     async duckNormalRender(){
-        this.duckNormalSprites = await this.spriteRender("../../../asset/Cuphead/Duck/Idle/cuphead_duck_00",7)
+        this.duckNormalSprites = await this.spriteRender("../../../asset/Cuphead/Duck/Idle/cuphead_duck_00",3)
     }
     async duckIdleRender(){
         this.duckIdleSprites = await this.spriteRender("../../../asset/Cuphead/Duck/Idle/cuphead_duck_idle_00",8)
@@ -70,6 +71,9 @@ export class CupheadSprites {
     }
     async dashRender(){
         this.dashSprites = await this.spriteRender("../../../asset/Cuphead/Dash/Ground/cuphead_dash_00",8)
+    }
+    async dashAirRender(){
+        this.dashAirSprites = await this.spriteRender("../../../asset/Cuphead/Dash/Air/cuphead_dash_air_00",6)
     }
 
     getIdle(){
@@ -102,6 +106,9 @@ export class CupheadSprites {
     getDashSprites(){
         return this.dashSprites
     }
+    getAirSprites(){
+        return this.dashAirSprites
+    }
 
 
     async renderAllSprites(){
@@ -115,5 +122,6 @@ export class CupheadSprites {
         await this.duckShootRender()
         await this.jumpRender()
         await this.dashRender()
+        await this.dashAirRender()
     }
 }

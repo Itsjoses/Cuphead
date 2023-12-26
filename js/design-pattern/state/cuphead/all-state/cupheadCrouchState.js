@@ -16,22 +16,6 @@ export class CupheadCrouchState extends CupheadState{
 
     updateState(){
         const cupheadController = this.cuphead.controller
-        // if(cupheadController.crouch == false){
-        //     if(this.cuphead.sprite != CupheadSprites.getInstace().getDuckStandupSprites()){
-        //         this.cuphead.tick = 0
-        //     }
-
-        //     this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.crouchStandup
-        //     this.cuphead.sprite = CupheadSprites.getInstace().getDuckStandupSprites()
-        //     if(this.cuphead.tick >= this.cuphead.sprite.length - 1){
-        //         if(cupheadController.shot == true) {
-        //             this.cuphead.currentState = new CupheadShotStraightState(this.cuphead)
-        //         }
-        //         if(cupheadController.left == true ||  cupheadController.right == true) this.cuphead.currentState = new CupheadRunState(this.cuphead)
-        //         this.cuphead.currentState = new CupheadIdleState(this.cuphead)
-        //         // this.cuphead.sprite = CupheadSprites.getInstace().getIdle()
-        //     }
-        // }
         /**
          * state from normal crouch to idle crouch or attack crouch
          */
@@ -52,9 +36,9 @@ export class CupheadCrouchState extends CupheadState{
     }
 
     update(){
+        this.updateFrame()
         this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
-        this.updateFrame()
     }
 } 

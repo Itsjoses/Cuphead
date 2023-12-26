@@ -15,12 +15,18 @@ function checkUp(){
 
 function checkDown(){
     window.addEventListener("keydown",(e) => {
-        if(e.keyCode == GameSetting.K_RIGHT) CURRGAME.cuphead.controller.right = true
-        if(e.keyCode == GameSetting.K_LEFT) CURRGAME.cuphead.controller.left = true
+        if(e.keyCode == GameSetting.K_RIGHT){
+            CURRGAME.cuphead.controller.right = true
+            CURRGAME.cuphead.orientation = false
+        } 
+        if(e.keyCode == GameSetting.K_LEFT){
+            CURRGAME.cuphead.controller.left = true
+            CURRGAME.cuphead.orientation = true
+        } 
         if(e.keyCode == GameSetting.K_DOWN) CURRGAME.cuphead.controller.crouch = true
         if(e.keyCode == GameSetting.K_JUMP){CURRGAME.cuphead.jump()} 
         if(e.keyCode == GameSetting.K_SHOT) CURRGAME.cuphead.controller.shot = true
-        if(e.keyCode == GameSetting.K_DASH) CURRGAME.cuphead.controller.dash = true
+        if(e.keyCode == GameSetting.K_DASH) CURRGAME.cuphead.dash()
     })
 }
 
