@@ -25,6 +25,10 @@ export class GAME {
         this.dockA = null
         this.dockB = null
         this.cloudA = null
+        this.sail = null
+        this.waveHeight = 0
+        this.ebbtide = false
+
     }
 
     stroke(){
@@ -63,9 +67,23 @@ export class GAME {
         this.waterB.update()
         this.dockA.update()
         this.cuphead.update()
+        // this.mast.update()
+        // this.sail.update()
+        this.boss.update()
+        // this.rail.update()
+        // this.mainShip.update()
         this.dockB.update()
         this.waterA.update()
+        this.gameWave()
+        // console.log(this.waveHeight);
         requestAnimationFrame(this.render.bind(this))
+    }
+
+    gameWave(){
+        if(this.ebbtide == false) this.waveHeight += (25 * this.delta)
+        if(this.ebbtide == true) this.waveHeight -= (25 * this.delta) 
+        if(this.waveHeight >= 50) this.ebbtide = true
+        if(this.waveHeight <= 0) this.ebbtide = false
     }
 
 }

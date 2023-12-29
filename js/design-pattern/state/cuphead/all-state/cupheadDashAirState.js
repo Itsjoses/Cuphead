@@ -1,3 +1,4 @@
+import { GameSetting } from "../../../../settings/gameSettings.js";
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "./../cupheadState.js";
 import { CupheadCrouchState } from "./cupheadCrouchState.js";
@@ -5,21 +6,19 @@ import { CupheadIdleState } from "./cupheadIdleState.js";
 import { CupheadRunState } from "./cupheadRunState.js";
 import { CupheadShotStraightState } from "./cupheadShotStraightState.js";
 
-export class CupheadDashState extends CupheadState {
-    constructor(cuphead) {
+export class CupheadDashAirState extends CupheadState {
+    constructor(cuphead,airGround) {
         super(cuphead)
+        this.airGround = airGround
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashAirSprites()
+        this.currentVelocityY = this.cuphead.transform.velocity.y
     }
 
     updateState() {
-        console.log("ini masih true",this.cuphead.controller.dash );
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
-            console.log("masuk ke idle");
             this.cuphead.controller.dash = false
-            console.log("ini udah false",this.cuphead.controller.dash );
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)
-            
         }
     }
 
@@ -53,8 +52,28 @@ export class CupheadDashState extends CupheadState {
         ctx.restore();
     }
 
-    groundColiision(){
+    groundCollision(){
+        if(this.cuphead.sprite == CupheadSprites.getInstace().getDashAirSprites()){
+            this.cuphead.transform.velocity.y += this.airGround  * this.cuphead.GAME.delta
+            this.cuphead.transform.position.y += this.cuphead.transform.velocity.y
+            if(this.cuphead.transform.position.y  > this.airGround  - this.cuphead.sprite[this.cuphead.tick].height){
+                this.cuphead.transform.position.y = this.airGround  -  this.cuphead.sprite[this.cuphead.tick].height
+            } 
+            else this.cuphead.transform.position.y = this.cuphead.transform.position.y
+        }else{
+            this.cuphead.transform.velocity.y = 5
+        }
+    }
 
+    wallCollision(){
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick];
+        const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle()
+        if((this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width) + currentSprite.width >= 874){
+            this.cuphead.transform.position.x = 874 - currentStaticIdleSprite[0].width
+        }
+        if(this.cuphead.transform.position.x <= 0){
+            this.cuphead.transform.position.x = 0
+        }
     }
 
     update() {
@@ -63,5 +82,6 @@ export class CupheadDashState extends CupheadState {
         this.updateTransform()
         this.cuphead.changeSprite()
         this.groundCollision()
+        this.wallCollision()
     }
 } 

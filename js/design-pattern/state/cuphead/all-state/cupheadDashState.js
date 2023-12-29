@@ -16,9 +16,9 @@ export class CupheadDashState extends CupheadState {
         console.log("ini masih true",this.cuphead.controller.dash );
         // console.log("ini position x :",this.cuphead.transform.position.x,"ini width canvas :", this.cuphead.sprite[this.cuphead.tick].width);
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
-            console.log("masuk ke idle");
+            // console.log("masuk ke idle");
             this.cuphead.controller.dash = false
-            console.log("ini udah false",this.cuphead.controller.dash );
+            // console.log("ini udah false",this.cuphead.controller.dash );
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)
             
         }
@@ -32,6 +32,18 @@ export class CupheadDashState extends CupheadState {
             this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
             this.cuphead.transform.position.y,currentSprite.width,
             currentSprite.height)
+            const ctx = this.cuphead.GAME.ctx;
+        
+        // Draw a rectangle around the character (adjust dimensions as needed)
+        ctx.beginPath();
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the line width 
+        ctx.rect(
+            this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
+            this.cuphead.transform.position.y,currentSprite.width,
+            currentSprite.height
+        );
+        ctx.stroke();
     }
 
     backRender() {
@@ -68,11 +80,26 @@ export class CupheadDashState extends CupheadState {
         ctx.restore();
     }
 
+    /**
+     * @override from cuphead wallCollision
+     */
+    wallCollision(){
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick];
+        const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle()
+        if((this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width) + currentSprite.width >= 874){
+            this.cuphead.transform.position.x = 874 - currentStaticIdleSprite[0].width
+        }
+        if(this.cuphead.transform.position.x <= 0){
+            this.cuphead.transform.position.x = 0
+        }
+    }
+
     update() {
         this.updateFrame()
         this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
+        this.wallCollision()
     }
 } 

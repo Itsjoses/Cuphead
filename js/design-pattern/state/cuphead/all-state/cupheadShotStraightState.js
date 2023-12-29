@@ -23,6 +23,7 @@ export class CupheadShotStraightState extends CupheadState{
             this.cuphead.currentState = new CupheadRunShotStraightState(this.cuphead)
         }
         if(cupheadController.crouch == true){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadCrouchState(this.cuphead)
         }
         if(cupheadController.jump == true){

@@ -3,8 +3,8 @@ import { GAME } from "../game.js";
 import { GameSetting } from "../settings/gameSettings.js";
 
 export class Character extends GameObject{
-    constructor(x,y,w,h,scale = 1,CHAR_CONF){
-        super(x,y,w,h,scale = 1,CHAR_CONF)
+    constructor(x,y,w,h,scale,CHAR_CONF){
+        super(x,y,w,h,scale,CHAR_CONF)
         this.orientation = false
         this.controller = {
             left: false,
@@ -18,7 +18,7 @@ export class Character extends GameObject{
 
     jump(){
         if(this.controller.jump == false){
-            this.transform.velocity.y = -10
+            this.transform.velocity.y = -15
             this.controller.jump = true
         }
     }

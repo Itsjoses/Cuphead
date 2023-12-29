@@ -106,7 +106,7 @@ export class CupheadSprites {
     getDashSprites(){
         return this.dashSprites
     }
-    getAirSprites(){
+    getDashAirSprites(){
         return this.dashAirSprites
     }
 

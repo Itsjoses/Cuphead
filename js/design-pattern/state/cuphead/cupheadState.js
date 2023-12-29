@@ -20,8 +20,10 @@ export class CupheadState{
     }
 
     frontRender(currentSprite){
+        // console.log(this.cuphead.sprite);
+
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
-        console.log(this.cuphead.transform.position.x);
+        // console.log(this.cuphead.transform.position.x);
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getIdle()
@@ -34,7 +36,8 @@ export class CupheadState{
     }
 
     updateFrame(){
-        const currentSprite =  this.cuphead.sprite[this.cuphead.tick]
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick]
+        // console.log(this.cuphead.tick);
         if(this.cuphead.orientation == false) this.frontRender(currentSprite)
         else this.backRender(currentSprite)
     }

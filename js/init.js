@@ -15,11 +15,23 @@ import { CloudA } from "./model/background/cloud/cloudA.js";
 import { CloudB } from "./model/background/cloud/cloudB.js";
 import { CloudC } from "./model/background/cloud/cloudC.js";
 import { CloudD } from "./model/background/cloud/cloudD.js";
+import { CaptainSprites } from "./design-pattern/singleton/captainSprite.js";
+import { ShipSprites } from "./design-pattern/singleton/shipSprite.js";
+import { SHIP_CONF } from "./settings/shipSettings.js";
+import { Sail } from "./model/ship/sailShip.js";
+import { MainShip } from "./model/ship/mainShip.js";
+import { Rail } from "./model/ship/railShip.js";
+import { Mast } from "./model/ship/mast.Ship.js";
+import { Captain } from "./model/captain.js";
+import { CAPTAIN_CONF } from "./settings/captainSettings.js";
+import { Boss } from "./model/boss.js";
 
 // getInstance
 const game = GAME.getInstace();
 const cupheadSprites = CupheadSprites.getInstace()
 const backgroundSprites = BackgroundSprites.getInstance()
+const captainSprites = CaptainSprites.getInstance()
+const shipSprites = ShipSprites.getInstance()
 
 function canvasInit(){
     game.canvas.width = GameSetting.WIDTH
@@ -29,8 +41,8 @@ function canvasInit(){
 function renderSprite(){
     game.cuphead = new CupHead(150,1,300,300,1,CUPHEAD_CONF)
     game.waterA = new WaterA(1,740,300,300,1,BACKGROUD_CONF)
-    game.waterB = new WaterB(1,730,300,300,1,BACKGROUD_CONF)
-    game.waterC = new WaterC(1,590,300,300,1,BACKGROUD_CONF)
+    game.waterB = new WaterB(1,720,300,300,1,BACKGROUD_CONF)
+    game.waterC = new WaterC(1,570,300,300,1,BACKGROUD_CONF)
     game.waterD = new WaterD(1,520,300,300,1,BACKGROUD_CONF)
     game.dockA = new DockA(-270,510,300,300,1.2,BACKGROUD_CONF)
     game.dockB = new DockB(-170,574,300,300,1.2,BACKGROUD_CONF)
@@ -38,6 +50,7 @@ function renderSprite(){
     game.cloudB = new CloudB(1,150,1,BACKGROUD_CONF)
     game.cloudC = new CloudC(1,10,1,BACKGROUD_CONF)
     game.cloudD = new CloudD(1,1,1,BACKGROUD_CONF)
+    game.boss = Boss.getInstance()
 }
 
 function eventRender(){
@@ -48,10 +61,11 @@ function eventRender(){
 async function play(){
     await cupheadSprites.renderAllSprites()
     await backgroundSprites.renderAllSprites()
+    await captainSprites.renderAllSprites()
+    await shipSprites.renderAllSprites()
     canvasInit()
     renderSprite()
     game.render()
-    // eventRender()
 }
 
 play()

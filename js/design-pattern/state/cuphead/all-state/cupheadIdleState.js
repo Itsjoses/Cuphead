@@ -39,8 +39,8 @@ export class CupheadIdleState extends CupheadState {
 
     update() {
         this.updateFrame()
-        this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
+        this.updateState()
     }
 } 

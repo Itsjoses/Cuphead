@@ -2,7 +2,7 @@ export class GameSetting {
     static WIDTH = 1280
     static HEIGHT = 720
     static GROUND = 635
-    static GRAVITY = 20
+    static GRAVITY = 30
 
     /**
      * Character Key Controller

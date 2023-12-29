@@ -15,9 +15,11 @@ export class CupheadRunShotStraightState extends CupheadState{
     updateState(){
         const cupheadController = this.cuphead.controller
         if(cupheadController.shot == false){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadRunState(this.cuphead)
         }
         if(cupheadController.left == false && cupheadController.right == false){
+            this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadShotStraightState(this.cuphead)
         }
         if(cupheadController.jump == true){
@@ -32,9 +34,10 @@ export class CupheadRunShotStraightState extends CupheadState{
 
     update(){
         this.updateFrame()
-        this.updateState()
         this.updateTransform()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
+        this.cuphead.wallCollision()
+        this.updateState()
     }
 } 
