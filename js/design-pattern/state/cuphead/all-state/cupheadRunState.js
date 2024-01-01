@@ -8,6 +8,8 @@ import { CupheadRunShotStraightState } from "./cupheadRunShotStraightState.js";
 export class CupheadRunState extends CupheadState {
     constructor(cuphead) {
         super(cuphead)
+        this.cuphead.tick = 0
+        this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.run
         this.cuphead.sprite = CupheadSprites.getInstace().getRun()
     }

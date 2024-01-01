@@ -1,5 +1,6 @@
 import { CupheadSprites } from "../design-pattern/singleton/cupheadSprite.js";
 import { CupheadIdleState } from "../design-pattern/state/cuphead/all-state/cupheadIdleState.js";
+import { CupheadIntroState } from "../design-pattern/state/cuphead/all-state/cupheadIntroState.js";
 import { Character } from "./character.js";
 export class CupHead extends Character{
     constructor(x,y,w,h,scale = 1,CHAR_CONF){

@@ -22,6 +22,10 @@ export const CAPTAIN_CONF = {
     putOcto:{
         max:5,
         speed:4
+    },
+    laugh:{
+        max:5,
+        speed:7
     }
 
 }

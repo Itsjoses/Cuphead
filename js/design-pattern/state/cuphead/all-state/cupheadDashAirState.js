@@ -9,6 +9,8 @@ import { CupheadShotStraightState } from "./cupheadShotStraightState.js";
 export class CupheadDashAirState extends CupheadState {
     constructor(cuphead,airGround) {
         super(cuphead)
+        this.cuphead.tick = 0
+        this.cuphead.spriteInterval = 0
         this.airGround = airGround
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashAirSprites()

@@ -8,6 +8,8 @@ import { CupheadJumpState } from "./cupheadJumpState.js";
 export class CupheadCrouchAttackState extends CupheadState{
     constructor(cuphead){
         super(cuphead)
+        this.cuphead.tick = 0
+        this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.crouchAttack
         this.cuphead.sprite = CupheadSprites.getInstace().getDuckShootSprites()
     }

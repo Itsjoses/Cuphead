@@ -8,6 +8,8 @@ import { CupheadShotStraightState } from "./cupheadShotStraightState.js";
 export class CupheadDashState extends CupheadState {
     constructor(cuphead) {
         super(cuphead)
+        this.cuphead.tick = 0
+        this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashSprites()
     }
@@ -32,7 +34,7 @@ export class CupheadDashState extends CupheadState {
             this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
             this.cuphead.transform.position.y,currentSprite.width,
             currentSprite.height)
-            const ctx = this.cuphead.GAME.ctx;
+        const ctx = this.cuphead.GAME.ctx;
         
         // Draw a rectangle around the character (adjust dimensions as needed)
         ctx.beginPath();

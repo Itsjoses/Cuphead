@@ -1,5 +1,6 @@
 import { CaptainIdleOctoState } from "../design-pattern/state/captain/all-state/captainIdleOctoState.js";
 import { CaptainIdleState } from "../design-pattern/state/captain/all-state/captainIdleState.js";
+import { CaptainLaughState } from "../design-pattern/state/captain/all-state/captainLaughState.js";
 import { CaptainPickOctoState } from "../design-pattern/state/captain/all-state/captainPickOctoState.js";
 import { CaptainPutOctoState } from "../design-pattern/state/captain/all-state/captainPutOctoState.js";
 import { CaptainShootOctoState } from "../design-pattern/state/captain/all-state/captainShootOcto.state.js";

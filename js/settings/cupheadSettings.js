@@ -59,4 +59,10 @@ export const CUPHEAD_CONF = {
         velocityX: 0,
         velocityY: 0
     },
+    intro:{
+        max: 5,
+        speed: 4,
+        velocityX: 0,
+        velocityY: 0
+    },
 }

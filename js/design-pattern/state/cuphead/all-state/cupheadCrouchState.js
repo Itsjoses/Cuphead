@@ -10,6 +10,8 @@ import { CupheadShotStraightState } from "./cupheadShotStraightState.js";
 export class CupheadCrouchState extends CupheadState{
     constructor(cuphead){
         super(cuphead)
+        this.cuphead.tick = 0
+        this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.crouchNormal
         this.cuphead.sprite = CupheadSprites.getInstace().getDuckNormalSpritest()
     }
