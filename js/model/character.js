@@ -29,6 +29,8 @@ export class Character extends GameObject{
         }
     }
 
+    
+
     groundCollision(){
         this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta
         this.transform.position.y += this.transform.velocity.y

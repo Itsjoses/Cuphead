@@ -25,7 +25,7 @@ export const CUPHEAD_CONF = {
     },
     shotStraight:{
         max: 5,
-        speed: 3,
+        speed: 4,
         velocityX: 0,
         velocityY: 0
     },

@@ -15,7 +15,6 @@ export class CupheadDashState extends CupheadState {
     }
 
     updateState() {
-        console.log("ini masih true",this.cuphead.controller.dash );
         // console.log("ini position x :",this.cuphead.transform.position.x,"ini width canvas :", this.cuphead.sprite[this.cuphead.tick].width);
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
             // console.log("masuk ke idle");

@@ -25,6 +25,7 @@ import { Mast } from "./model/ship/mast.Ship.js";
 import { Captain } from "./model/captain.js";
 import { CAPTAIN_CONF } from "./settings/captainSettings.js";
 import { Boss } from "./model/boss.js";
+import { BulletSprite } from "./design-pattern/singleton/bulletSprite.js";
 
 // getInstance
 const game = GAME.getInstace();
@@ -32,6 +33,7 @@ const cupheadSprites = CupheadSprites.getInstace()
 const backgroundSprites = BackgroundSprites.getInstance()
 const captainSprites = CaptainSprites.getInstance()
 const shipSprites = ShipSprites.getInstance()
+const bulletSprites = BulletSprite.getInstance()
 
 function canvasInit(){
     game.canvas.width = GameSetting.WIDTH
@@ -63,6 +65,7 @@ async function play(){
     await backgroundSprites.renderAllSprites()
     await captainSprites.renderAllSprites()
     await shipSprites.renderAllSprites()
+    await bulletSprites.renderAllSprites()
     canvasInit()
     renderSprite()
     game.render()

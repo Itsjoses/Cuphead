@@ -28,6 +28,7 @@ export class GAME {
         this.sail = null
         this.waveHeight = 0
         this.ebbtide = false
+        this.bulletRender = []
 
     }
 
@@ -67,15 +68,15 @@ export class GAME {
         this.waterB.update()
         this.dockA.update()
         this.cuphead.update()
-        // this.mast.update()
-        // this.sail.update()
         this.boss.update()
-        // this.rail.update()
-        // this.mainShip.update()
         this.dockB.update()
+        if(this.bulletRender != []){
+            this.bulletRender.forEach(bullet => {
+                bullet.update()
+            })
+        }
         this.waterA.update()
         this.gameWave()
-        // console.log(this.waveHeight);
         requestAnimationFrame(this.render.bind(this))
     }
 

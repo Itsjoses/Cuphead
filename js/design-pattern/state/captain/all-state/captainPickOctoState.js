@@ -10,7 +10,6 @@ export class CaptainPickOctoState extends CaptainState {
         this.captain.CURR_CHAR_CONF = this.captain.CHAR_CONF.pickOcto
         this.captain.sprite = CaptainSprites.getInstance().pickOctoCaptain
         this.captain.topSprite = CaptainSprites.getInstance().pickOctoTopCaptain
-        console.log(this.captain.topSprite);
         this.spriteBoundry ={
             0:{
                 x:0,
@@ -107,7 +106,6 @@ export class CaptainPickOctoState extends CaptainState {
 
     updateFrame(){
         const currentSprite = this.captain.sprite[this.captain.tick]
-        console.log(this.captain.tick, this.captain.transform.position.x - currentSprite.width);
         this.captain.GAME.ctx.drawImage(currentSprite,
             this.captain.transform.position.x - currentSprite.width + this.spriteBoundry[this.captain.tick].x,
             this.captain.transform.position.y + this.captain.GAME.waveHeight - currentSprite.height,

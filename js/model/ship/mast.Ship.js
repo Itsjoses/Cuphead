@@ -6,7 +6,6 @@ export class Mast extends GameObject{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
         this.sprite = ShipSprites.getInstance().mastShip
-        console.log(this.sprite);
         this.CURR_CHAR_CONF = CHAR_CONF.mast
     }
 

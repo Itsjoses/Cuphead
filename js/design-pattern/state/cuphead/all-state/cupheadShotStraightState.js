@@ -1,3 +1,5 @@
+import { CupheadBulletLoop } from "../../../../model/cupheadBulletLoop.js";
+import { BULLET_CONF } from "../../../../settings/bulletSettings.js";
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
 import { CupheadCrouchState } from "./cupheadCrouchState.js";
@@ -12,6 +14,8 @@ export class CupheadShotStraightState extends CupheadState{
         this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.shotStraight
         this.cuphead.sprite = CupheadSprites.getInstace().getShotStraight()
+        this.lastBulletSpawnTime = 0; // Initialize the last bullet spawn time
+        this.bulletSpawnInterval = 200; // Set the desired interval in milliseconds (1 second in this example)
     }
 
     updateState() {
@@ -54,6 +58,14 @@ export class CupheadShotStraightState extends CupheadState{
             30
         );
         ctx.stroke();
+            // Check if enough time has passed since the last bullet spawn
+            const currentTime = Date.now();
+            if (currentTime - this.lastBulletSpawnTime >= this.bulletSpawnInterval) {
+                // Spawn a new bullet
+                this.cuphead.GAME.bulletRender.push(new CupheadBulletLoop(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height / 2.7, 0, 0, 1, BULLET_CONF));
+                // Update the last bullet spawn time
+                this.lastBulletSpawnTime = currentTime;
+            }
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getIdle()
@@ -73,19 +85,18 @@ export class CupheadShotStraightState extends CupheadState{
         );
         ctx.stroke();
         this.cuphead.GAME.ctx.restore()
-        // console.log(this.cuphead.transform.position.x + staticIdleSprite[0].width/2 -staticIdleSprite[0].width/2);
     }
 
     updateFrame(){
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
-        // console.log(this.cuphead.tick);
         if(this.cuphead.orientation == false) this.frontRender(currentSprite)
         else this.backRender(currentSprite)
+
     }
     update() {
         this.updateFrame()
-        this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()
+        this.updateState()
     }
 } 
