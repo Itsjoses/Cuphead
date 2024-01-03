@@ -12,6 +12,8 @@ export class CupheadRunShotStraightState extends CupheadState{
         this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.runShotStraight
         this.cuphead.sprite = CupheadSprites.getInstace().getRunShotStraight()
+        this.lastBulletSpawnTime = 0; // Initialize the last bullet spawn time
+        this.bulletSpawnInterval = 200; // Set the desired interval in milliseconds (1 second in this example)
     }
 
     updateState(){
@@ -32,6 +34,42 @@ export class CupheadRunShotStraightState extends CupheadState{
             this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadDashState(this.cuphead)
         }
+    }
+
+    frontRender(currentSprite){
+        this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
+        const ctx = this.cuphead.GAME.ctx;
+        this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width,this.cuphead.transform.position.y + currentSprite.height/2.2,0,0) 
+    }
+    backRender(currentSprite){
+        const staticIdleSprite = CupheadSprites.getInstace().getRunShotStraight()
+        this.cuphead.GAME.ctx.save()
+        this.cuphead.GAME.ctx.translate(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2)
+        this.cuphead.GAME.ctx.scale(-1,1)  
+        this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
+        const ctx = this.cuphead.GAME.ctx;
+        ctx.beginPath();
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the line width 
+        ctx.rect(
+            -staticIdleSprite[0].width/2 + currentSprite.width,
+            -currentSprite.height / 2 + currentSprite.height/2,
+            30,
+            30
+        );
+        ctx.stroke();
+        this.cuphead.shootBullet(
+            this.cuphead.transform.position.x + staticIdleSprite[0].width/2,
+            this.cuphead.transform.position.y  + currentSprite.height/2,
+            -staticIdleSprite[0].width/2 + currentSprite.width,
+            -currentSprite.height / 2 + currentSprite.height/2.2) 
+        this.cuphead.GAME.ctx.restore()
+    }
+
+    updateFrame(){
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick]
+        if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+        else this.backRender(currentSprite)
     }
 
     update(){

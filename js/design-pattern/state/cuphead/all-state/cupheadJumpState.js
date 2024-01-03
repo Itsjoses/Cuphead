@@ -34,6 +34,54 @@ export class CupheadJumpState extends CupheadState {
         }
     }
 
+    frontRender(currentSprite){
+        // console.log(this.cuphead.sprite);
+
+        this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
+        const ctx = this.cuphead.GAME.ctx;
+        // Draw a rectangle around the character (adjust dimensions as needed)
+        ctx.beginPath();
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the line width 
+        ctx.rect(
+            this.cuphead.transform.position.x + currentSprite.width,
+            this.cuphead.transform.position.y + currentSprite.height/2,
+            30,
+            30
+        );
+        if(this.cuphead.controller.shot == true){
+            this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/2,0,0) 
+        }
+    }
+    backRender(currentSprite){
+        const staticIdleSprite = CupheadSprites.getInstace().getIdle()
+        this.cuphead.GAME.ctx.save()
+        this.cuphead.GAME.ctx.translate(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2)
+        this.cuphead.GAME.ctx.scale(-1,1)  
+        this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
+        const ctx = this.cuphead.GAME.ctx;
+        ctx.beginPath();
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the line width 
+        ctx.rect(
+            -staticIdleSprite[0].width/2 + currentSprite.width,
+            -currentSprite.height / 2 + currentSprite.height/2,
+            30,
+            30
+        );
+        ctx.stroke();
+        this.cuphead.GAME.ctx.restore()
+        if(this.cuphead.controller.shot == true){
+            this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/2) 
+        }
+    }
+
+    updateFrame(){
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick]
+        if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+        else this.backRender(currentSprite)
+    }
+
     update() {
         this.updateFrame()
         this.updateTransform()

@@ -28,8 +28,8 @@ export class GAME {
         this.sail = null
         this.waveHeight = 0
         this.ebbtide = false
-        this.bulletRender = []
-
+        this.bulletLoops = []
+        this.bulletSpawns = []
     }
 
     stroke(){
@@ -55,6 +55,35 @@ export class GAME {
         this.lastTime = currTime
     }
 
+    deleteBullet(){
+        this.bulletLoops = this.bulletLoops.filter(bullet => {
+            return (
+                bullet.transform.position.x >= 0 &&
+                bullet.transform.position.x <= GameSetting.WIDTH &&
+                bullet.transform.position.y >= 0 &&
+                bullet.transform.position.y <= GameSetting.HEIGHT
+            );
+        });
+    }
+
+
+    bulletSpawnRender(){
+        this.bulletSpawns = this.bulletSpawns.filter(bullet => {
+            return (
+                bullet.tick <= bullet.sprite.length - 1);
+        });
+        this.bulletSpawns.forEach(bullet => {
+            bullet.update()
+        })
+    }
+
+    bulletRender(){
+        this.deleteBullet()
+        this.bulletLoops.forEach(bullet => {
+            bullet.update()
+        })
+    }
+
     async render(){
         this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
         this.stroke()
@@ -70,11 +99,8 @@ export class GAME {
         this.cuphead.update()
         this.boss.update()
         this.dockB.update()
-        if(this.bulletRender != []){
-            this.bulletRender.forEach(bullet => {
-                bullet.update()
-            })
-        }
+        this.bulletRender()
+        this.bulletSpawnRender()
         this.waterA.update()
         this.gameWave()
         requestAnimationFrame(this.render.bind(this))

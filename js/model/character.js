@@ -18,7 +18,7 @@ export class Character extends GameObject{
 
     jump(){
         if(this.controller.jump == false){
-            this.transform.velocity.y = -15
+            this.transform.velocity.y = GameSetting.JUMP * this.GAME.delta
             this.controller.jump = true
         }
     }
@@ -28,8 +28,6 @@ export class Character extends GameObject{
             this.controller.dash = true
         }
     }
-
-    
 
     groundCollision(){
         this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta

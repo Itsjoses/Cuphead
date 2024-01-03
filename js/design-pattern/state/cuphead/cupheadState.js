@@ -12,8 +12,14 @@ export class CupheadState{
             else this.cuphead.transform.position.x += this.cuphead.CURR_CHAR_CONF.velocityX* this.cuphead.GAME.delta
         } 
         else{
-            if (cupheadController.left == true) this.cuphead.transform.velocityX = -this.cuphead.CURR_CHAR_CONF.velocityX
-            else if (cupheadController.right == true) this.cuphead.transform.velocityX = this.cuphead.CURR_CHAR_CONF.velocityX
+            if (cupheadController.left == true){
+                this.cuphead.orientation = true
+                this.cuphead.transform.velocityX = -this.cuphead.CURR_CHAR_CONF.velocityX
+            } 
+            else if (cupheadController.right == true){
+                this.cuphead.orientation = false
+                this.cuphead.transform.velocityX = this.cuphead.CURR_CHAR_CONF.velocityX
+            } 
             else this.cuphead.transform.velocityX = 0
             this.cuphead.transform.position.x += this.cuphead.transform.velocityX * this.cuphead.GAME.delta
         }
