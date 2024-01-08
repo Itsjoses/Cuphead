@@ -112,12 +112,16 @@ export class CaptainIdleOctoState extends CaptainState {
 
     updateFrame() {
         const currentSprite = this.captain.sprite[this.captain.tick]
-     
+        this.captain.transform.size.sizeW = currentSprite.width * this.captain.transform.scale
+        this.captain.transform.size.sizeH = currentSprite.height * this.captain.transform.scale
+        this.captain.transform.realPosition.x = this.captain.transform.position.x - currentSprite.width / 1.2
+        this.captain.transform.realPosition.y = this.captain.transform.position.y + this.captain.GAME.waveHeight - currentSprite.height
+        
         this.captain.GAME.ctx.drawImage(currentSprite,
-            this.captain.transform.position.x - currentSprite.width / 1.2,
-            this.captain.transform.position.y + this.captain.GAME.waveHeight - currentSprite.height,
-            currentSprite.width * this.captain.transform.scale,
-            currentSprite.height * this.captain.transform.scale)
+            this.captain.transform.realPosition.x,
+            this.captain.transform.realPosition.y,
+            this.captain.transform.size.sizeW,
+            this.captain.transform.size.sizeH)
 
 
         

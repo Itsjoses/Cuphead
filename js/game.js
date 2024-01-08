@@ -55,13 +55,17 @@ export class GAME {
         this.lastTime = currTime
     }
 
+    removeBulletLoop(bulletLoop) {
+        this.bulletLoops = this.bulletLoops.filter(bullet => bullet !== bulletLoop);
+    }
+
     deleteBullet(){
         this.bulletLoops = this.bulletLoops.filter(bullet => {
             return (
-                bullet.transform.position.x >= 0 &&
-                bullet.transform.position.x <= GameSetting.WIDTH &&
-                bullet.transform.position.y >= 0 &&
-                bullet.transform.position.y <= GameSetting.HEIGHT
+                (bullet.transform.position.x >= 0 &&
+                    bullet.transform.position.x <= GameSetting.WIDTH &&
+                    bullet.transform.position.y >= 0 &&
+                    bullet.transform.position.y <= GameSetting.HEIGHT)
             );
         });
     }
@@ -78,7 +82,7 @@ export class GAME {
     }
 
     bulletRender(){
-        this.deleteBullet()
+        // this.deleteBullet()
         this.bulletLoops.forEach(bullet => {
             bullet.update()
         })
@@ -103,6 +107,7 @@ export class GAME {
         this.bulletSpawnRender()
         this.waterA.update()
         this.gameWave()
+        // console.log(this.bulletLoops);
         requestAnimationFrame(this.render.bind(this))
     }
 

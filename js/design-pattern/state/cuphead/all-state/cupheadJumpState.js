@@ -83,10 +83,10 @@ export class CupheadJumpState extends CupheadState {
     }
 
     update() {
+        this.cuphead.groundCollision()
         this.updateFrame()
         this.updateTransform()
         this.cuphead.changeSprite()
-        this.cuphead.groundCollision()
         this.cuphead.wallCollision()
         this.updateState()
     }

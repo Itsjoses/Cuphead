@@ -27,7 +27,10 @@ export class CupheadState{
 
     frontRender(currentSprite){
         // console.log(this.cuphead.sprite);
-
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
         // console.log(this.cuphead.transform.position.x);
     }

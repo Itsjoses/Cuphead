@@ -6,6 +6,7 @@ export class Character extends GameObject{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
         this.orientation = false
+        this.hp = 100
         this.controller = {
             left: false,
             right: false,
@@ -17,7 +18,7 @@ export class Character extends GameObject{
     }
 
     jump(){
-        if(this.controller.jump == false){
+        if(this.controller.jump == false && this.controller.dash == false){
             this.transform.velocity.y = GameSetting.JUMP * this.GAME.delta
             this.controller.jump = true
         }

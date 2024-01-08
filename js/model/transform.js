@@ -4,6 +4,10 @@ export class Transform{
             x: positionX,
             y: positiony,
         },
+        this.realPosition = {
+            x: 0,
+            y: 0
+        },
         this.rotation = {
             x: rotationX,
             y: rotationY

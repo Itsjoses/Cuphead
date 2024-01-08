@@ -5,6 +5,9 @@ export const BULLET_CONF={
     cupheadSpawn:{
         speed:2
     },
+    cupheadDie:{
+        speed: 3
+    },
     captain:{
         speed: 3
     }

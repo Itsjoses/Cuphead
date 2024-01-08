@@ -28,7 +28,6 @@ export class CupHead extends Character{
         const currentSprite =  this.sprite[this.tick]
             const currentTime = Date.now();
             if (currentTime - this.lastBulletSpawnTime >= this.bulletSpawnInterval) {
-                console.log("render");
                 // Spawn a new bullet
                 this.GAME.bulletSpawns.push(new CupheadBulletSpawn(bulletX, bulletY - 15, 0, 0, 1, BULLET_CONF,orientationX,orientationY));
                 this.GAME.bulletLoops.push(new CupheadBulletLoop(bulletX, bulletY, 0, 0, 1, BULLET_CONF,orientationX,orientationY));

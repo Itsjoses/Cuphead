@@ -1,3 +1,5 @@
+import { CaptainBulletLoop } from "../../../../model/captainBulletLoop.js"
+import { BULLET_CONF } from "../../../../settings/bulletSettings.js"
 import { CaptainSprites } from "../../../singleton/captainSprite.js"
 import { CaptainState } from "../captainState.js"
 import { CaptainIdleOctoState } from "./captainIdleOctoState.js"
@@ -10,6 +12,7 @@ export class CaptainShootOctoState extends CaptainState {
         this.captain.CURR_CHAR_CONF = this.captain.CHAR_CONF.shootOcto
         this.captain.sprite = CaptainSprites.getInstance().shootOctoCaptain
         this.captain.topSprite = CaptainSprites.getInstance().shootOctoTopCaptain
+        this.shootTrue = false
         this.spriteBoundry = {
             0: {
                 x: 0,
@@ -60,14 +63,48 @@ export class CaptainShootOctoState extends CaptainState {
         }
     }
 
+    bullet(){
+
+    }
+
     updateFrame() {
         const currentSprite = this.captain.sprite[this.captain.tick]
-     
+        this.captain.transform.size.sizeW = currentSprite.width * this.captain.transform.scale
+        this.captain.transform.size.sizeH = currentSprite.height * this.captain.transform.scale
+
+        this.captain.transform.realPosition.x = this.captain.transform.position.x - currentSprite.width / 1.2 + this.spriteBoundry[this.captain.tick].x
+        this.captain.transform.realPosition.y = this.captain.transform.position.y + this.captain.GAME.waveHeight - currentSprite.height
+
         this.captain.GAME.ctx.drawImage(currentSprite,
-            this.captain.transform.position.x - currentSprite.width / 1.2 + this.spriteBoundry[this.captain.tick].x,
-            this.captain.transform.position.y + this.captain.GAME.waveHeight - currentSprite.height,
-            currentSprite.width * this.captain.transform.scale,
-            currentSprite.height * this.captain.transform.scale)
+            this.captain.transform.realPosition.x,
+            this.captain.transform.realPosition.y,
+            this.captain.transform.size.sizeW,
+            this.captain.transform.size.sizeH)
+
+    // Draw a rectangle
+    this.captain.GAME.ctx.beginPath();
+    this.captain.GAME.ctx.strokeStyle = 'red'; // Set the fill color to red (you can change it to any color you want)
+    this.captain.GAME.ctx.lineWidth = 2; // Set the fill color to red (you can change it to any color you want)
+    this.captain.GAME.ctx.rect(
+        this.captain.transform.realPosition.x,
+        this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
+        30,
+        30)
+    this.captain.GAME.ctx.stroke()
+
+        if(this.captain.tick >= this.captain.sprite.length - 2){
+            if(this.shootTrue == false){
+                console.log("shoot");
+                this.captain.GAME.bulletLoops.push(new CaptainBulletLoop(this.captain.transform.realPosition.x,
+                    this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
+                    0, 0, 1,BULLET_CONF))
+                    this.shootTrue = true
+            }
+           
+        }else{
+            this.shootTrue =false
+        }
+        
     }
 
     updateTopFrame(){
@@ -88,6 +125,6 @@ export class CaptainShootOctoState extends CaptainState {
         this.captain.GAME.boss.mainShip.update()
         this.updateTopFrame()
         this.captain.changeSprite()
-        this.updateState()
+        // this.updateState()
     }
 } 
