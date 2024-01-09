@@ -34,15 +34,34 @@ export class CupheadCrouchAttackState extends CupheadState{
     }
 
     frontRender(currentSprite){
-        this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
+        this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.realPosition.x,this.cuphead.transform.realPosition.y,this.cuphead.transform.size.sizeW,this.cuphead.transform.size.sizeH)
         this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/4,0,0) 
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getIdle()
         this.cuphead.GAME.ctx.save()
-        this.cuphead.GAME.ctx.translate(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2)
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
+
+        this.cuphead.GAME.ctx.translate(
+            this.cuphead.transform.realPosition.x + staticIdleSprite[0].width / 2,
+            this.cuphead.transform.realPosition.y + this.cuphead.transform.size.sizeH / 2
+        );
+
         this.cuphead.GAME.ctx.scale(-1,1)  
-        this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
+        this.cuphead.GAME.ctx.drawImage(
+            currentSprite,
+            -staticIdleSprite[0].width / 2,
+            -this.cuphead.transform.size.sizeH / 2,
+            currentSprite.width,
+            currentSprite.height
+        );
         this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/4) 
         this.cuphead.GAME.ctx.restore()
     }

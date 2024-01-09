@@ -37,8 +37,11 @@ export class CupheadRunShotStraightState extends CupheadState{
     }
 
     frontRender(currentSprite){
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
-        const ctx = this.cuphead.GAME.ctx;
         this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width,this.cuphead.transform.position.y + currentSprite.height/2.2,0,0) 
     }
     backRender(currentSprite){
@@ -46,18 +49,11 @@ export class CupheadRunShotStraightState extends CupheadState{
         this.cuphead.GAME.ctx.save()
         this.cuphead.GAME.ctx.translate(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2)
         this.cuphead.GAME.ctx.scale(-1,1)  
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
-        const ctx = this.cuphead.GAME.ctx;
-        ctx.beginPath();
-        ctx.strokeStyle = 'red'; // Set the stroke color
-        ctx.lineWidth = 2; // Set the line width 
-        ctx.rect(
-            -staticIdleSprite[0].width/2 + currentSprite.width,
-            -currentSprite.height / 2 + currentSprite.height/2,
-            30,
-            30
-        );
-        ctx.stroke();
         this.cuphead.shootBullet(
             this.cuphead.transform.position.x + staticIdleSprite[0].width/2,
             this.cuphead.transform.position.y  + currentSprite.height/2,

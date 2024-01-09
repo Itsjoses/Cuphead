@@ -41,7 +41,7 @@ export class CupheadIdleState extends CupheadState {
 
     update() {
 
-        console.log(this.cuphead.transform.position.x,this.cuphead.transform.position.y);
+        // console.log(this.cuphead.transform.position.x,this.cuphead.transform.position.y);
         this.cuphead.groundCollision()
         this.updateFrame()
         this.cuphead.changeSprite()

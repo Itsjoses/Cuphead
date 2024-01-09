@@ -1,4 +1,5 @@
 import { CaptainBulletLoop } from "../../../../model/captainBulletLoop.js"
+import { CaptainBulletSpawn } from "../../../../model/captainBulletSpawn.js"
 import { BULLET_CONF } from "../../../../settings/bulletSettings.js"
 import { CaptainSprites } from "../../../singleton/captainSprite.js"
 import { CaptainState } from "../captainState.js"
@@ -13,6 +14,7 @@ export class CaptainShootOctoState extends CaptainState {
         this.captain.sprite = CaptainSprites.getInstance().shootOctoCaptain
         this.captain.topSprite = CaptainSprites.getInstance().shootOctoTopCaptain
         this.shootTrue = false
+        this.shootCount = 0
         this.spriteBoundry = {
             0: {
                 x: 0,
@@ -81,24 +83,20 @@ export class CaptainShootOctoState extends CaptainState {
             this.captain.transform.size.sizeW,
             this.captain.transform.size.sizeH)
 
-    // Draw a rectangle
-    this.captain.GAME.ctx.beginPath();
-    this.captain.GAME.ctx.strokeStyle = 'red'; // Set the fill color to red (you can change it to any color you want)
-    this.captain.GAME.ctx.lineWidth = 2; // Set the fill color to red (you can change it to any color you want)
-    this.captain.GAME.ctx.rect(
-        this.captain.transform.realPosition.x,
-        this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
-        30,
-        30)
-    this.captain.GAME.ctx.stroke()
+
 
         if(this.captain.tick >= this.captain.sprite.length - 2){
             if(this.shootTrue == false){
-                console.log("shoot");
+                // console.log("shoot");
                 this.captain.GAME.bulletLoops.push(new CaptainBulletLoop(this.captain.transform.realPosition.x,
                     this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
                     0, 0, 1,BULLET_CONF))
+                    
+                    this.captain.GAME.bulletSpawns.push(new CaptainBulletSpawn(this.captain.transform.realPosition.x,
+                        this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
+                        0, 0, 1,BULLET_CONF));
                     this.shootTrue = true
+                    this.shootCount = 1
             }
            
         }else{

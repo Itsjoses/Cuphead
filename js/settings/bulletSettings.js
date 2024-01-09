@@ -8,7 +8,10 @@ export const BULLET_CONF={
     cupheadDie:{
         speed: 3
     },
-    captain:{
+    captainSpawn:{
+        speed: 3
+    },
+    captainLoop:{
         speed: 3
     }
 }

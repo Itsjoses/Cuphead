@@ -34,14 +34,33 @@ export class CupheadState{
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
         // console.log(this.cuphead.transform.position.x);
     }
-    backRender(currentSprite){
-        const staticIdleSprite = CupheadSprites.getInstace().getIdle()
-        this.cuphead.GAME.ctx.save()
-        this.cuphead.GAME.ctx.translate(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2)
-        this.cuphead.GAME.ctx.scale(-1,1)  
-        this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
-        this.cuphead.GAME.ctx.restore()
-        // console.log(this.cuphead.transform.position.x + staticIdleSprite[0].width/2 -staticIdleSprite[0].width/2);
+    backRender(currentSprite) {
+        const staticIdleSprite = CupheadSprites.getInstace().getIdle();
+        this.cuphead.GAME.ctx.save();
+    
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
+        
+        this.cuphead.GAME.ctx.translate(
+            this.cuphead.transform.realPosition.x + staticIdleSprite[0].width / 2,
+            this.cuphead.transform.realPosition.y + this.cuphead.transform.size.sizeH / 2
+        );
+    
+        // Scale horizontally by -1 to flip the image
+        this.cuphead.GAME.ctx.scale(-1, 1);
+    
+        // Draw the flipped image
+        this.cuphead.GAME.ctx.drawImage(
+            currentSprite,
+            -staticIdleSprite[0].width / 2,
+            -this.cuphead.transform.size.sizeH / 2,
+            currentSprite.width,
+            currentSprite.height
+        );
+    
+        this.cuphead.GAME.ctx.restore();
     }
 
     updateFrame(){

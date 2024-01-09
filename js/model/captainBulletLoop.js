@@ -12,19 +12,49 @@ export class CaptainBulletLoop extends GameObject{
         this.spriteInterval = 0
         this.speed = GameSetting.CUPHEADBULLETSPEED * this.GAME.delta
         this.angle = 0
+        this.target = {}
         this.getAngle()
     }
 
     getAngle(){
         const target={
-            x: this.GAME.cuphead.transform.realPosition.x + this.GAME.cuphead.transform.size.sizeW/2,
-            y: this.GAME.cuphead.transform.realPosition.y + this.GAME.cuphead.transform.size.sizeH/2
+            x: this.GAME.cuphead.transform.realPosition.x ,
+            y: this.GAME.cuphead.transform.realPosition.y ,
+            w: this.GAME.cuphead.transform.size.sizeW,
+            h: this.GAME.cuphead.transform.size.sizeH
         }
-        const deltaX = (this.transform.position.x + this.sprite[0].width /2) - target.x ;
-        const deltaY = (this.transform.position.y + this.sprite[0].height /2) - target.y ;
+        const deltaX = (this.transform.position.x + this.sprite[0].width /2) - (target.x + target.w/2);
+        const deltaY = (this.transform.position.y + this.sprite[0].height /2) - (target.y + target.h/2);
     
         // Menggunakan atan2 untuk menghitung sudut rotasi
         this.angle = Math.atan2(deltaY, deltaX);
+    }
+
+    rectangleCircleCollision() {
+        this.target={
+            x: this.GAME.cuphead.transform.realPosition.x ,
+            y: this.GAME.cuphead.transform.realPosition.y ,
+            w: this.GAME.cuphead.transform.size.sizeW,
+            h: this.GAME.cuphead.transform.size.sizeH
+        } 
+        // Convert the circle position to the rectangle's local coordinates
+        const circleLocalX = this.transform.position.x - (this.target.x + this.target.w / 2);
+        const circleLocalY = this.transform.position.y - (this.target.y + this.target.h / 2);
+    
+        // Rotate the circle back to the rectangle's orientation
+        const rotatedX = circleLocalX * Math.cos(this.angle) - circleLocalY * Math.sin(this.angle);
+        const rotatedY = circleLocalX * Math.sin(this.angle) + circleLocalY * Math.cos(this.angle);
+    
+        // Closest point in the rectangle to the circle
+        let closestX = Math.max(-this.target.w / 2, Math.min(rotatedX, this.target.w / 2));
+        let closestY = Math.max(-this.target.h / 2, Math.min(rotatedY, this.target.h / 2));
+    
+        // Check if the distance between the circle and the closest point in the rectangle is less than the circle's radius
+        const distanceX = rotatedX - closestX;
+        const distanceY = rotatedY - closestY;
+        const distanceSquared = distanceX * distanceX + distanceY * distanceY;
+    
+        return distanceSquared <= 15 * 15; // Adjust the radius as needed
     }
 
     updateFrame(){
@@ -39,8 +69,8 @@ export class CaptainBulletLoop extends GameObject{
     
         // Translate to the center of the image
         this.GAME.ctx.translate(
-            this.transform.realPosition.x + this.transform.size.sizeW / 2,
-            this.transform.realPosition.y + this.transform.size.sizeH / 2
+            this.transform.realPosition.x + 30 / 2,
+            this.transform.realPosition.y + 30 / 2
         );
     
         // Rotate only the sprite
@@ -65,8 +95,8 @@ export class CaptainBulletLoop extends GameObject{
     }
 
     transformBullet(){
-       this.transform.position.x -= 1 * Math.cos(this.angle)
-       this.transform.position.y -= 1 * Math.sin(this.angle)
+       this.transform.position.x -= 10 * Math.cos(this.angle)
+       this.transform.position.y -= 10 * Math.sin(this.angle)
         
     }
 
@@ -97,11 +127,6 @@ export class CaptainBulletLoop extends GameObject{
             this.transform.position.y <= GameSetting.HEIGHT)){
                 this.GAME.removeBulletLoop(this);
             } 
-        if(this.sprite == BulletSprite.getInstance().cupheadBulletDie){
-            if(this.tick == this.sprite.length - 1){
-                this.GAME.removeBulletLoop(this);
-            }
-        }
     }
 
 
@@ -110,6 +135,7 @@ export class CaptainBulletLoop extends GameObject{
         // this.updateState()
         this.transformBullet()
         this.changeSprite()
-        // this.removeBullet()
+        this.removeBullet()
+        if(this.rectangleCircleCollision() == true) console.log("kena collision")
     }
 }

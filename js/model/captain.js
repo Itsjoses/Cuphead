@@ -24,7 +24,7 @@ export class Captain extends Character{
     }
 
     update(){
-        console.log(this.hp);
+        // console.log(this.hp);
         this.currentState.update()
     }
 }
