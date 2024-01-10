@@ -19,6 +19,7 @@ export class CaptainLaughState extends CaptainState {
     }
 
     update() {
+        this.captain.changePhase()
         this.updateFrame()
         this.captain.GAME.boss.mainShip.update()
         this.captain.changeSprite()

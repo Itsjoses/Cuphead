@@ -11,6 +11,8 @@ export class BulletSprite {
         this.cupheadBulletDie = []
         this.cupheadBulletLoop = []
         this.cupheadBulletSpawn = []
+        this.shipBulletSpawn = []
+        this.shipBulletLoop = []
     }
 
 
@@ -61,6 +63,8 @@ export class BulletSprite {
         this.cupheadBulletSpawn = await this.spriteRender("../../../asset/Bullet/Spawning/bullet_spawn_00",3)
         this.captainBulletSpawn = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/[Miscellaneous]/Bullet (Yellow)/Bullet (Effect, yellow, A)/yellow_pirate_peaBulletDeath_A_00",5)
         this.captainBulletLoop = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/[Miscellaneous]/Bullet (Yellow)/Bullet (Yellow, A)/yellow_pirate_peaBullet_A_00",4)
+        this.shipBulletLoop = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/[Ship]/Phase 1-3/[Miscellaneous]/[Cannonball]/Cannonball/pirate_boatCannonball_00",4)
+        this.shipBulletSpawn = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/[Ship]/Phase 1-3/[Miscellaneous]/[Cannonball]/Cannonball FX (A)/pirate_CannonDust_A_00",14)
     }
 
     async renderAllSprites(){

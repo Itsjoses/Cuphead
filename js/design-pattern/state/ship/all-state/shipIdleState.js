@@ -1,5 +1,6 @@
 import { ShipSprites } from "../../../singleton/shipSprite.js"
 import { ShipState } from "../shipState.js"
+import { ShipSpitsState } from "./shipSpitState.js"
 import { ShipBlinkState } from "./shipblinkState.js"
 
 
@@ -13,12 +14,19 @@ export class ShipIdleState extends ShipState {
     }
 
     updateState() {
+        console.log(this.ship.phase);
+        const randomState = Math.random() * 100 
         if(this.ship.tick >= this.ship.sprite.length - 1){
-            if(Math.random() * 100 <= 1){
+            if(randomState<= 1){
                 this.ship.currentState = new ShipBlinkState(this.ship)
             }
-            if(Math.random() * 100 <= 3){
+            if(randomState<= 3){
                 this.ship.currentState = new ShipBlinkState(this.ship)
+            }
+            if(this.ship.phase == 2){
+                if(randomState<= 5){
+                    this.ship.currentState = new ShipSpitsState(this.ship)
+                }
             }
         }
 

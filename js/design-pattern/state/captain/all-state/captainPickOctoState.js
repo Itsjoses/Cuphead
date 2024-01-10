@@ -131,6 +131,7 @@ export class CaptainPickOctoState extends CaptainState {
     }
 
     update() {
+        this.captain.changePhase()
         this.updateFrame()
         this.captain.GAME.boss.mainShip.update()
         this.updateTopFrame()

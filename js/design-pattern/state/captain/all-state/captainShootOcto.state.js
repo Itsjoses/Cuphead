@@ -60,8 +60,19 @@ export class CaptainShootOctoState extends CaptainState {
     }
 
     updateState() {
+        
         if(this.captain.tick >= this.captain.sprite.length - 1){
-            this.captain.currentState = new CaptainIdleOctoState(this.captain)
+            const randomState = Math.random() * 100 
+            if(this.captain.GAME.boss.mainShip.phase == 1){
+                if(randomState <= 50){
+                    this.captain.currentState = new CaptainIdleOctoState(this.captain)
+                }
+            }
+            if(this.captain.GAME.boss.mainShip.phase == 2){
+                if(randomState <= 30){
+                    this.captain.currentState = new CaptainIdleOctoState(this.captain)
+                }
+            }
         }
     }
 
@@ -87,7 +98,6 @@ export class CaptainShootOctoState extends CaptainState {
 
         if(this.captain.tick >= this.captain.sprite.length - 2){
             if(this.shootTrue == false){
-                // console.log("shoot");
                 this.captain.GAME.bulletLoops.push(new CaptainBulletLoop(this.captain.transform.realPosition.x,
                     this.captain.transform.realPosition.y + this.captain.transform.size.sizeH/1.2,
                     0, 0, 1,BULLET_CONF))
@@ -116,6 +126,7 @@ export class CaptainShootOctoState extends CaptainState {
     }
 
     update() {
+        this.captain.changePhase()
         this.updateFrame()
         /**
          * need call like this so the frame can be stack
@@ -123,6 +134,6 @@ export class CaptainShootOctoState extends CaptainState {
         this.captain.GAME.boss.mainShip.update()
         this.updateTopFrame()
         this.captain.changeSprite()
-        // this.updateState()
+        this.updateState()
     }
 } 

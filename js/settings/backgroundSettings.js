@@ -1,19 +1,19 @@
 export const BACKGROUD_CONF={
     waterA:{
         max: 5,
-        speed: 2
+        speed: 1.95
     },
     waterB:{
         max: 5,
-        speed: 1.99
+        speed: 1.95
     },
     waterC:{
         max: 5,
-        speed: 1.99
+        speed: 1.95
     },
     waterD:{
         max: 5,
-        speed: 2
+        speed: 1.95
     },
     dockA:{
         max: 5,

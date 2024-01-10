@@ -3,31 +3,16 @@ import { CupheadSprites } from "../design-pattern/singleton/cupheadSprite.js";
 import { GameObject } from "../parent/gameObject.js"
 import { GameSetting } from "../settings/gameSettings.js";
 
-export class CaptainBulletLoop extends GameObject{
+export class ShipBulletLoop extends GameObject{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
-        this.sprite = BulletSprite.getInstance().captainBulletLoop
+        this.sprite = BulletSprite.getInstance().shipBulletLoop
         this.CURR_CHAR_CONF = CHAR_CONF.cupheadLoop
         this.tick = 0
         this.spriteInterval = 0
         this.speed = GameSetting.CUPHEADBULLETSPEED * this.GAME.delta
         this.angle = 0
         this.target = {}
-        this.getAngle()
-    }
-
-    getAngle(){
-        const target={
-            x: this.GAME.cuphead.transform.realPosition.x ,
-            y: this.GAME.cuphead.transform.realPosition.y ,
-            w: this.GAME.cuphead.transform.size.sizeW,
-            h: this.GAME.cuphead.transform.size.sizeH
-        }
-        const deltaX = (this.transform.position.x + this.sprite[0].width /2) - (target.x + target.w/2);
-        const deltaY = (this.transform.position.y + this.sprite[0].height /2) - (target.y + target.h/2);
-    
-        // Menggunakan atan2 untuk menghitung sudut rotasi
-        this.angle = Math.atan2(deltaY, deltaX);
     }
 
     rectangleCircleCollision() {
@@ -38,7 +23,7 @@ export class CaptainBulletLoop extends GameObject{
             h: this.GAME.cuphead.transform.size.sizeH
         } 
         // Convert the circle position to the rectangle's local coordinates
-        const circleLocalX = (this.transform.position.x - 10) - (this.target.x + this.target.w / 2);
+        const circleLocalX = (this.transform.position.x - 47) - (this.target.x + this.target.w / 2);
         const circleLocalY = this.transform.position.y - (this.target.y + this.target.h / 2);
     
         // Rotate the circle back to the rectangle's orientation
@@ -54,7 +39,7 @@ export class CaptainBulletLoop extends GameObject{
         const distanceY = rotatedY - closestY;
         const distanceSquared = distanceX * distanceX + distanceY * distanceY;
     
-        return distanceSquared <= 15 * 15; // Adjust the radius as needed
+        return distanceSquared <= 45 * 45; // Adjust the radius as needed
     }
 
     updateFrame(){
@@ -69,12 +54,9 @@ export class CaptainBulletLoop extends GameObject{
     
         // Translate to the center of the image
         this.GAME.ctx.translate(
-            this.transform.realPosition.x,
-            this.transform.realPosition.y
+            this.transform.realPosition.x ,
+            this.transform.realPosition.y 
         );
-    
-        // Rotate only the sprite
-        this.GAME.ctx.rotate(this.angle);
     
         // Draw the rotated image
         this.GAME.ctx.drawImage(
@@ -85,19 +67,16 @@ export class CaptainBulletLoop extends GameObject{
             this.transform.size.sizeH
         );
         this.GAME.ctx.beginPath();
-        this.GAME.ctx.arc(-10, 0, 15, 0, 2 * Math.PI);
+        this.GAME.ctx.arc(-47, 0, 45, 0, 2 * Math.PI);
         this.GAME.ctx.strokeStyle = 'red';
         this.GAME.ctx.stroke();
     
         // Restore the canvas state to prevent affecting subsequent drawings
         this.GAME.ctx.restore();
-
     }
 
     transformBullet(){
-       this.transform.position.x -= 10 * Math.cos(this.angle)
-       this.transform.position.y -= 10 * Math.sin(this.angle)
-        
+       this.transform.position.x -= 10
     }
 
     changeSprite(){
@@ -136,7 +115,7 @@ export class CaptainBulletLoop extends GameObject{
         this.transformBullet()
         this.changeSprite()
         this.removeBullet()
-        if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false){
+        if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false  ){
             this.GAME.cuphead.controller.hit = "hit"
         } 
     }

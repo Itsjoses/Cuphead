@@ -1,11 +1,13 @@
 import { ShipSprites } from "../../design-pattern/singleton/shipSprite.js"
 import { ShipIdleState } from "../../design-pattern/state/ship/all-state/shipIdleState.js"
+import { ShipSpitsState } from "../../design-pattern/state/ship/all-state/shipSpitState.js"
 import { GameObject } from "../../parent/gameObject.js"
 
 export class MainShip extends GameObject{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
-        this.currentState = new ShipIdleState(this)
+        this.phase = 1
+        this.currentState = new ShipSpitsState(this)
         // this.sprite = ShipSprites.getInstance().idleShip
         // this.CURR_CHAR_CONF = CHAR_CONF.idle
     }

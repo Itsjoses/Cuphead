@@ -13,7 +13,8 @@ export class Character extends GameObject{
             shot: false,
             jump: false,
             crouch: false,
-            dash: false
+            dash: false,
+            hit: "idle",
         }
     }
 

@@ -1,6 +1,7 @@
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
 import { CupheadDashState } from "./cupheadDashState.js";
+import { CupheadHitGroundState } from "./cupheadHitGroundState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
 import { CupheadJumpState } from "./cupheadJumpState.js";
 import { CupheadRunShotStraightState } from "./cupheadRunShotStraightState.js";
@@ -31,6 +32,11 @@ export class CupheadRunState extends CupheadState {
         if(cupheadController.dash == true){
             this.cuphead.tick = 0
             this.cuphead.currentState = new CupheadDashState(this.cuphead)
+        }
+        if(cupheadController.hit == "hit"){
+            cupheadController.delayHit = true
+            this.cuphead.delayHitTime = Date.now();
+            this.cuphead.currentState = new CupheadHitGroundState(this.cuphead)
         }
         
     }

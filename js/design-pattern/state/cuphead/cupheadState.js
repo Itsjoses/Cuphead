@@ -3,6 +3,7 @@ import { CupheadSprites } from "../../singleton/cupheadSprite.js"
 export class CupheadState{
     constructor(cuphead){
         this.cuphead = cuphead
+        this.hitSprite = 0
     }
 
     updateTransform() {
@@ -32,6 +33,16 @@ export class CupheadState{
         this.cuphead.transform.size.sizeW = currentSprite.width;
         this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
+        const ctx = this.cuphead.GAME.ctx;
+        
+        // Draw a rectangle around the character (adjust dimensions as needed)
+        ctx.beginPath();
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the line width 
+        ctx.rect(
+            this.cuphead.transform.realPosition.x,this.cuphead.transform.realPosition.y,this.cuphead.transform.size.sizeW,this.cuphead.transform.size.sizeH
+        );
+        ctx.stroke();
         // console.log(this.cuphead.transform.position.x);
     }
     backRender(currentSprite) {
@@ -65,8 +76,18 @@ export class CupheadState{
 
     updateFrame(){
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
-        // console.log(this.cuphead.tick);
-        if(this.cuphead.orientation == false) this.frontRender(currentSprite)
-        else this.backRender(currentSprite)
+        console.log(this.cuphead.controller.hit);
+        if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2
+        else this.hitSprite = 0
+
+        if(this.hitSprite == 0){
+            if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+            else this.backRender(currentSprite)
+        }else{
+            if(this.cuphead.tick % this.hitSprite == 0){
+                if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+                else this.backRender(currentSprite)
+        }
+    }
     }
 }

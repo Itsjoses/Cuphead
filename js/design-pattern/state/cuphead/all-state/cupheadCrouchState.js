@@ -3,6 +3,7 @@ import { CupheadState } from "./../cupheadState.js";
 import { CupheadCrouchAttackState } from "./cupheadCrouchAttackState.js";
 import { CupheadCrouchIdleState } from "./cupheadCrouchIdleState.js";
 import { CupheadCrouchStandupState } from "./cupheadCrouchStandupState.js";
+import { CupheadHitGroundState } from "./cupheadHitGroundState.js";
 import { CupheadIdleState } from "./cupheadIdleState.js";
 import { CupheadRunState } from "./cupheadRunState.js";
 import { CupheadShotStraightState } from "./cupheadShotStraightState.js";
@@ -34,6 +35,11 @@ export class CupheadCrouchState extends CupheadState{
                 this.cuphead.currentState = new CupheadCrouchIdleState(this.cuphead)
             }
 
+        }
+        if(cupheadController.hit == "hit"){
+            cupheadController.delayHit = true
+            this.cuphead.delayHitTime = Date.now();
+            this.cuphead.currentState = new CupheadHitGroundState(this.cuphead)
         }
     }
 

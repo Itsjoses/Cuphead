@@ -12,6 +12,19 @@ export class CupHead extends Character{
         this.currentState = new CupheadIdleState(this)
         this.lastBulletSpawnTime = 0; // Initialize the last bullet spawn time
         this.bulletSpawnInterval = GameSetting.CUPHEADBULLETSPAWN; // Set the desired interval in milliseconds (1 second in this example)
+        this.delayHitTime = Date.now(); // Initialize the last bullet spawn time
+        this.delayHitInterval = 3000; // Set the desired interval in milliseconds (1 second in this example)
+    }
+
+    delayHitReset(){
+        console.log();
+        if(this.controller.hit == "delay"){
+            const currentTime = Date.now();
+            if (currentTime - this.delayHitTime >= this.delayHitInterval) {
+                this.controller.hit = "idle"
+                this.delayHitTime = currentTime;
+            }
+        }
     }
 
     updateFrame(){

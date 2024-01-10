@@ -1,4 +1,3 @@
-
 export class CupheadSprites {
     static CUPHEADINSTACE = null
     static getInstace(){
@@ -80,6 +79,14 @@ export class CupheadSprites {
     async introRender(){
         this.introSprites = await this.spriteRender("../../../asset/Cuphead/Intro/cuphead_intro_a_00",28)
     }
+    
+    async getHitGroundRender(){
+        this.hitGroundSprites = await this.spriteRender("../../../asset/Cuphead/Hit/Ground/cuphead_hit_00",6)
+    }
+
+    async getHitAirRender(){
+        this.hitAirSprites = await this.spriteRender("../../../asset/Cuphead/Hit/Air/cuphead_hit_air_00",6)
+    }
 
     getIdle(){
         return this.idleSprites
@@ -129,5 +136,7 @@ export class CupheadSprites {
         await this.dashRender()
         await this.dashAirRender()
         await this.introRender()
+        await this.getHitGroundRender() 
+        await this.getHitAirRender() 
     }
 }

@@ -101,6 +101,7 @@ export class CaptainPutOctoState extends CaptainState {
     }
 
     update() {
+        this.captain.changePhase()
         this.updateFrame()
         /**
          * need call like this so the frame can be stack

@@ -65,4 +65,16 @@ export const CUPHEAD_CONF = {
         velocityX: 0,
         velocityY: 0
     },
+    hitGround:{
+        max: 5,
+        speed: 6,
+        velocityX: 350,
+        velocityY: 0
+    },
+    hitAir:{
+        max: 5,
+        speed: 6,
+        velocityX: 350,
+        velocityY: 0
+    }
 }

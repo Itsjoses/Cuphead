@@ -10,7 +10,9 @@ import { Character } from "./character.js";
 export class Captain extends Character{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
-        this.currentState = new CaptainShootOctoState(this)
+        this.currentState = new CaptainLaughState(this)
+        this.hp = 200
+        console.log(this.hp);
     }
 
     groundCollision(){
@@ -21,6 +23,12 @@ export class Captain extends Character{
             this.transform.position.y = 475 -  this.sprite[this.tick].height
         } 
         else this.transform.position.y = this.transform.position.y
+    }
+
+    changePhase(){
+        if(this.hp <= 250){
+            this.GAME.boss.mainShip.phase = 2
+        }
     }
 
     update(){
