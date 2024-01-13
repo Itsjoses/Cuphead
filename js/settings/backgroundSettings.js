@@ -39,5 +39,9 @@ export const BACKGROUD_CONF={
         max: 5,
         speedWind: 5
     },
+    screenFX:{
+        max: 5,
+        speed: 1
+    }
 
 }

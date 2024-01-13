@@ -99,6 +99,10 @@ export class CaptainSprites {
         this.idleOctoTopCaptain = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/Idle (With octopus, Top)/pirate_peaIdle_T_00",5)
     }
 
+    async knockOutCaptainRender(){
+        this.knockOutCaptain = await this.spriteRender("../../../asset/Captain Brineybeard/Captain Brineybeard/Knockout/pirate_knockout_00",12)
+    }
+
     
 
     async renderAllSprites(){
@@ -114,5 +118,6 @@ export class CaptainSprites {
         await this.ShootOctoTopCaptainRender()
         await this.idleOctoCaptainRender()
         await this.idleOctoTopCaptainRender()
+        await this.knockOutCaptainRender()
     }
 }

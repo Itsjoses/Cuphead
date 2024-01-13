@@ -4,6 +4,7 @@ import { BULLET_CONF } from "../../../../settings/bulletSettings.js"
 import { CaptainSprites } from "../../../singleton/captainSprite.js"
 import { CaptainState } from "../captainState.js"
 import { CaptainIdleOctoState } from "./captainIdleOctoState.js"
+import { CaptainKnockOutState } from "./captainKnockOutState.js"
 
 export class CaptainShootOctoState extends CaptainState {
     constructor(captain) {
@@ -60,7 +61,10 @@ export class CaptainShootOctoState extends CaptainState {
     }
 
     updateState() {
-        
+        if(this.captain.hp == 0){
+            this.captain.currentState = new CaptainKnockOutState(this.captain)
+            return
+        }
         if(this.captain.tick >= this.captain.sprite.length - 1){
             const randomState = Math.random() * 100 
             if(this.captain.GAME.boss.mainShip.phase == 1){

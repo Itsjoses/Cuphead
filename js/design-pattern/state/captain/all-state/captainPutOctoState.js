@@ -1,6 +1,7 @@
 import { CaptainSprites } from "../../../singleton/captainSprite.js"
 import { CaptainState } from "../captainState.js"
 import { CaptainIdleState } from "./captainIdleState.js"
+import { CaptainKnockOutState } from "./captainKnockOutState.js"
 
 export class CaptainPutOctoState extends CaptainState {
     constructor(captain) {
@@ -67,6 +68,10 @@ export class CaptainPutOctoState extends CaptainState {
     }
 
     updateState() {
+        if(this.captain.hp == 0){
+            this.captain.currentState = new CaptainKnockOutState(this.captain)
+            return
+        }
         if(this.captain.tick >= this.captain.sprite.length - 1){
             this.captain.currentState = new CaptainIdleState(this.captain)
         }

@@ -26,6 +26,7 @@ import { Captain } from "./model/captain.js";
 import { CAPTAIN_CONF } from "./settings/captainSettings.js";
 import { Boss } from "./model/boss.js";
 import { BulletSprite } from "./design-pattern/singleton/bulletSprite.js";
+import { ScreenFX } from "./model/background/screen/screenFX.js";
 
 // getInstance
 const game = GAME.getInstace();
@@ -43,6 +44,7 @@ function canvasInit(){
 function renderSprite(){
     game.cuphead = new CupHead(150,1,300,300,1,CUPHEAD_CONF)
     game.waterA = new WaterA(1,740,300,300,1,BACKGROUD_CONF)
+    game.screenFX = new ScreenFX(0,0,300,300,1,BACKGROUD_CONF)
     game.waterB = new WaterB(1,720,300,300,1,BACKGROUD_CONF)
     game.waterC = new WaterC(1,570,300,300,1,BACKGROUD_CONF)
     game.waterD = new WaterD(1,520,300,300,1,BACKGROUD_CONF)

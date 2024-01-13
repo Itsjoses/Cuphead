@@ -11,7 +11,7 @@ export class Captain extends Character{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
         this.currentState = new CaptainLaughState(this)
-        this.hp = 200
+        this.hp = 50
         console.log(this.hp);
     }
 

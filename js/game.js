@@ -14,7 +14,7 @@ export class GAME {
         this.ctx.imageSmoothingEnabled = true;
         this.ctx.imageSmoothingQuality = 'high';
         this.delta = 0
-        this.lastTime = new Date()
+        this.lastTime = performance.now();
         this.tempInterval = 0
         this.tempFrameCounter = 0
         this.cuphead = null
@@ -49,7 +49,7 @@ export class GAME {
     }
 
     getDelta(){
-        const currTime = new Date()
+        const currTime = performance.now();
         const diffDelta = (currTime - this.lastTime) / 1000
         this.delta = diffDelta
         this.lastTime = currTime
@@ -88,7 +88,8 @@ export class GAME {
         })
     }
 
-    async render(){
+    async render(timestamp){
+  
         this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
         this.stroke()
         this.getDelta()
@@ -96,6 +97,7 @@ export class GAME {
         this.cloudC.update()
         this.cloudB.update()
         this.cloudA.update()
+        
         this.waterD.update()
         this.waterC.update()
         this.waterB.update()
@@ -107,7 +109,9 @@ export class GAME {
         this.bulletSpawnRender()
         this.waterA.update()
         this.gameWave()
-        // console.log(this.bulletLoops);
+        this.screenFX.update()
+        console.log(this.bulletLoops);
+        console.log(this.bulletSpawns);
         requestAnimationFrame(this.render.bind(this))
     }
 

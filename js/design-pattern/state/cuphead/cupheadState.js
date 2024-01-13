@@ -88,6 +88,6 @@ export class CupheadState{
                 if(this.cuphead.orientation == false) this.frontRender(currentSprite)
                 else this.backRender(currentSprite)
         }
-    }
+        }
     }
 }

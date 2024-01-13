@@ -70,8 +70,21 @@ export class CupheadRunShotStraightState extends CupheadState{
 
     updateFrame(){
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
-        if(this.cuphead.orientation == false) this.frontRender(currentSprite)
-        else this.backRender(currentSprite)
+
+        if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2
+        else this.hitSprite = 0
+        
+        if(this.hitSprite == 0){
+            if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+            else this.backRender(currentSprite)
+        }else{
+            if(this.cuphead.tick % this.hitSprite == 0){
+                if(this.cuphead.orientation == false) this.frontRender(currentSprite)
+                else this.backRender(currentSprite)
+        }
+        }
+
+
     }
 
     update(){
