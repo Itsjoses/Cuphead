@@ -1,4 +1,5 @@
 import { ShipBulletLoop } from "../../../../model/shipBulletLoop.js"
+import { ShipBulletSpawn } from "../../../../model/shipBulletSpawn.js"
 import { BULLET_CONF } from "../../../../settings/bulletSettings.js"
 import { ShipSprites } from "../../../singleton/shipSprite.js"
 import { ShipState } from "../shipState.js"
@@ -16,8 +17,12 @@ export class ShipSpitsState extends ShipState {
     }
 
     updateState() {
+        if(this.ship.GAME.boss.captain.hp == 0) this.ship.currentState = new ShipIdleState(this.ship)
         if(this.ship.tick >= this.ship.sprite.length - 9){
             if(this.shootTrue == false){
+                this.ship.GAME.bulletSpawns.push(new ShipBulletSpawn(750,
+                    550,
+                    0, 0, 1,BULLET_CONF));
                 this.ship.GAME.bulletLoops.push(new ShipBulletLoop(750,
                     550,
                     0, 0, 1,BULLET_CONF))

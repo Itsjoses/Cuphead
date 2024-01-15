@@ -27,6 +27,7 @@ import { CAPTAIN_CONF } from "./settings/captainSettings.js";
 import { Boss } from "./model/boss.js";
 import { BulletSprite } from "./design-pattern/singleton/bulletSprite.js";
 import { ScreenFX } from "./model/background/screen/screenFX.js";
+import { IntroScreen } from "./model/background/screen/introScreen.js";
 
 // getInstance
 const game = GAME.getInstace();
@@ -54,6 +55,7 @@ function renderSprite(){
     game.cloudB = new CloudB(1,150,1,BACKGROUD_CONF)
     game.cloudC = new CloudC(1,10,1,BACKGROUD_CONF)
     game.cloudD = new CloudD(1,1,1,BACKGROUD_CONF)
+    game.screen.push(new IntroScreen(0,0,300,300,1,BACKGROUD_CONF))
     game.boss = Boss.getInstance()
 }
 

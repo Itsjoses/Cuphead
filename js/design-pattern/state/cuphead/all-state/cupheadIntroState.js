@@ -17,10 +17,11 @@ export class CupheadIntroState extends CupheadState {
     }
 
     updateState() {
-        if(this.cuphead.tick >= this.cuphead.sprite.length - 1){
-            this.cuphead.tick = 0
-            this.cuphead.currentState = new CupheadIdleState(this.cuphead)
-        }
+            if(this.cuphead.tick >= this.cuphead.sprite.length - 1){
+                this.cuphead.tick = 0
+                this.cuphead.currentState = new CupheadIdleState(this.cuphead)
+            }
+        
     }
 
     update() {

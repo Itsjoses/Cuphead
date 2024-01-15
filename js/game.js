@@ -11,8 +11,8 @@ export class GAME {
     constructor(){
         this.canvas = document.getElementById("myCanvas");
         this.ctx = this.canvas.getContext("2d");
-        this.ctx.imageSmoothingEnabled = true;
-        this.ctx.imageSmoothingQuality = 'high';
+        // this.ctx.imageSmoothingEnabled = true;
+        // this.ctx.imageSmoothingQuality = 'high';
         this.delta = 0
         this.lastTime = performance.now();
         this.tempInterval = 0
@@ -30,6 +30,8 @@ export class GAME {
         this.ebbtide = false
         this.bulletLoops = []
         this.bulletSpawns = []
+        this.intro = false
+        this.screen = []
     }
 
     stroke(){
@@ -57,6 +59,10 @@ export class GAME {
 
     removeBulletLoop(bulletLoop) {
         this.bulletLoops = this.bulletLoops.filter(bullet => bullet !== bulletLoop);
+    }
+
+    removeScreen(objScreen){
+        this.screen = this.screen.filter(screen => screen !== objScreen);
     }
 
     deleteBullet(){
@@ -93,6 +99,7 @@ export class GAME {
         this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
         this.stroke()
         this.getDelta()
+        
         this.cloudD.update()
         this.cloudC.update()
         this.cloudB.update()
@@ -108,8 +115,12 @@ export class GAME {
         this.bulletRender()
         this.bulletSpawnRender()
         this.waterA.update()
+        // this.screenFX.update()
+        this.screen.forEach(screen =>{
+            screen.update()
+        })
         this.gameWave()
-        this.screenFX.update()
+        
         console.log(this.bulletLoops);
         console.log(this.bulletSpawns);
         requestAnimationFrame(this.render.bind(this))

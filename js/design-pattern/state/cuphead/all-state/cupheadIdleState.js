@@ -17,6 +17,7 @@ export class CupheadIdleState extends CupheadState {
     }
 
     updateState() {
+        if(this.cuphead.GAME.intro == true) return
         const cupheadController = this.cuphead.controller
         if(cupheadController.left == true || cupheadController.right == true){
             this.cuphead.tick = 0

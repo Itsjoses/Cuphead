@@ -42,6 +42,18 @@ export const BACKGROUD_CONF={
     screenFX:{
         max: 5,
         speed: 1
+    },
+    irisScreen:{
+        max: 5,
+        speed: 2
+    },
+    wallop:{
+        max: 5,
+        speed: 3
+    },
+    knockout:{
+        max: 5,
+        speed: 5
     }
 
 }

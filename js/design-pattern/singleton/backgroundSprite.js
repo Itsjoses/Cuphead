@@ -17,6 +17,7 @@ export class BackgroundSprites{
         this.waterC = []
         this.waterD = []
         this.screenFX = []
+        this.iris = []
     }
 
     async waterRender(){
@@ -40,6 +41,15 @@ export class BackgroundSprites{
 
     async allScreen(){
         this.screenFX = await this.spriteRender("../../../asset/Screen FX/cuphead_screen_fx_0",126)
+        this.iris = await this.spriteRender("../../../asset/Screen Narratives/Iris/iris_0",17)
+        this.wallop = await this.spriteRender("../../../asset/Screen Narratives/Ready, WALLOP!/FightText_GetReady_0",51)
+        this.knockout = await this.spriteSelectedRender("../../../asset/Screen Narratives/A KNOCKOUT/FightText_KO_00",0,26)
+        console.log(this.knockout);
+
+    }
+
+    async iris(){
+        
     }
 
     async renderAllSprites(){
@@ -75,5 +85,16 @@ export class BackgroundSprites{
           img.onload = () => resolve(img);
           img.src = url;
         });
+    }
+
+    async spriteSelectedRender(path,StartSprite,EndSprite){
+        let tempImage = new Image()
+        let tempArraySprites = []
+        for(let i = StartSprite;i<=EndSprite;i++){
+            if(i < 10)tempImage = await this.loadImage(`${path}0${i}.png`)
+            else tempImage = await this.loadImage(`${path}${i}.png`)
+            tempArraySprites.push(tempImage)
+        }
+        return tempArraySprites
     }
 }

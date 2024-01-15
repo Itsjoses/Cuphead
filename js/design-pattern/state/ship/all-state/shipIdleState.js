@@ -14,7 +14,8 @@ export class ShipIdleState extends ShipState {
     }
 
     updateState() {
-        console.log(this.ship.phase);
+        if(this.ship.GAME.boss.captain.hp == 0) return
+        if(this.ship.GAME.intro == false) return
         const randomState = Math.random() * 100 
         if(this.ship.tick >= this.ship.sprite.length - 1){
             if(randomState<= 1){

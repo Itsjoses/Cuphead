@@ -9,7 +9,7 @@ import { CupheadBulletSpawn } from "./cupheadBulletSpawn.js";
 export class CupHead extends Character{
     constructor(x,y,w,h,scale = 1,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
-        this.currentState = new CupheadIdleState(this)
+        this.currentState = new CupheadIntroState(this)
         this.lastBulletSpawnTime = 0; // Initialize the last bullet spawn time
         this.bulletSpawnInterval = GameSetting.CUPHEADBULLETSPAWN; // Set the desired interval in milliseconds (1 second in this example)
         this.delayHitTime = Date.now(); // Initialize the last bullet spawn time

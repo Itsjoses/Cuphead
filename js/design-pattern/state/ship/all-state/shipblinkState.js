@@ -13,6 +13,7 @@ export class ShipBlinkState extends ShipState {
     }
 
     updateState() {
+        if(this.ship.GAME.boss.captain.hp == 0) this.ship.currentState = new ShipIdleState(this.ship)
         if(this.ship.tick >= this.ship.sprite.length - 1){
             this.ship.currentState = new ShipIdleState(this.ship)
         }
