@@ -20,10 +20,10 @@ export class ShipSpitsState extends ShipState {
         if(this.ship.GAME.boss.captain.hp == 0) this.ship.currentState = new ShipIdleState(this.ship)
         if(this.ship.tick >= this.ship.sprite.length - 9){
             if(this.shootTrue == false){
-                this.ship.GAME.bulletSpawns.push(new ShipBulletSpawn(750,
+                this.ship.GAME.bulletSpawns.push(new ShipBulletSpawn(850,
                     550,
                     0, 0, 1,BULLET_CONF));
-                this.ship.GAME.bulletLoops.push(new ShipBulletLoop(750,
+                this.ship.GAME.bulletLoops.push(new ShipBulletLoop(850,
                     550,
                     0, 0, 1,BULLET_CONF))
                     this.shootTrue = true
@@ -49,7 +49,7 @@ export class ShipSpitsState extends ShipState {
         ctx.strokeStyle = 'red'; // Set the stroke color
         ctx.lineWidth = 2; // Set the line width 
         ctx.rect(
-            750,
+            850,
             550,
             30,
             30

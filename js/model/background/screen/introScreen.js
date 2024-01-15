@@ -19,7 +19,7 @@ export class IntroScreen extends GameObject{
             this.CURR_CHAR_CONF = this.CHAR_CONF.wallop
         }
         if(this.tick >= this.sprite.length - 1 && this.sprite == BackgroundSprites.getInstance().wallop){
-            this.GAME.intro = false
+            this.GAME.intro = true
             this.GAME.removeScreen(this)
         }
     }

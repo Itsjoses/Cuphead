@@ -15,6 +15,7 @@ function checkUp(){
 
 function checkDown(){
     window.addEventListener("keydown",(e) => {
+        console.log(e);
         if(e.keyCode == GameSetting.K_RIGHT){
             CURRGAME.cuphead.controller.right = true
         } 
@@ -25,6 +26,7 @@ function checkDown(){
         if(e.keyCode == GameSetting.K_JUMP){CURRGAME.cuphead.jump()} 
         if(e.keyCode == GameSetting.K_SHOT) CURRGAME.cuphead.controller.shot = true
         if(e.keyCode == GameSetting.K_DASH) CURRGAME.cuphead.dash()
+        if(e.keyCode == 83) CURRGAME.pause = true
     })
 }
 

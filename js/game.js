@@ -32,6 +32,7 @@ export class GAME {
         this.bulletSpawns = []
         this.intro = false
         this.screen = []
+        this.pause = false
     }
 
     stroke(){
@@ -96,15 +97,16 @@ export class GAME {
 
     async render(timestamp){
   
-        this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
-        this.stroke()
+  
         this.getDelta()
         
+        if(this.pause == false){
+            this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
+        this.stroke()
         this.cloudD.update()
         this.cloudC.update()
         this.cloudB.update()
         this.cloudA.update()
-        
         this.waterD.update()
         this.waterC.update()
         this.waterB.update()
@@ -115,14 +117,14 @@ export class GAME {
         this.bulletRender()
         this.bulletSpawnRender()
         this.waterA.update()
-        // this.screenFX.update()
+        this.screenFX.update()
+        this.gameWave()
+        
+    }
+
         this.screen.forEach(screen =>{
             screen.update()
         })
-        this.gameWave()
-        
-        console.log(this.bulletLoops);
-        console.log(this.bulletSpawns);
         requestAnimationFrame(this.render.bind(this))
     }
 

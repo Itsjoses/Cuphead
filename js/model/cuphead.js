@@ -27,6 +27,10 @@ export class CupHead extends Character{
         }
     }
 
+    die(){
+     
+    }
+
     updateFrame(){
         const currentSprite = this.sprite[this.tick]
         this.GAME.ctx.drawImage(currentSprite,this.transform.position.x - currentSprite.width,this.transform.position.y,currentSprite.width,currentSprite.height)

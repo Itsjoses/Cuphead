@@ -18,7 +18,6 @@ export class Knockout extends GameObject{
             this.GAME.removeScreen(this)
             this.GAME.screen.push(new IrisReverse(0,0,300,300,1,BACKGROUD_CONF))
         }
-
         const currentSprite = this.sprite[this.tick]
         this.GAME.ctx.drawImage(currentSprite,this.transform.position.x,this.transform.position.y,this.transform.size.w,this.transform.size.h )
     }

@@ -38,6 +38,15 @@ export class ShipBulletSpawn extends GameObject{
 
     }
 
+    changeSprite(){
+        this.spriteInterval += 60* this.GAME.delta
+        if (this.spriteInterval > this.CURR_CHAR_CONF.speed) {
+            this.tick += 1;
+            this.spriteInterval = 0;
+          }
+    }
+
+
     update(){
         this.updateFrame()
         this.changeSprite()
