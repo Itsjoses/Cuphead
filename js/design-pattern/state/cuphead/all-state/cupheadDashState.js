@@ -12,9 +12,11 @@ export class CupheadDashState extends CupheadState {
         this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashSprites()
+        this.sounds.startCupheadDashSound()
     }
 
     updateState() {
+        if(this.cuphead.GAME.stop == true) return;
         // console.log("ini position x :",this.cuphead.transform.position.x,"ini width canvas :", this.cuphead.sprite[this.cuphead.tick].width);
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
             // console.log("masuk ke idle");

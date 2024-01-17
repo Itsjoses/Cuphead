@@ -54,6 +54,10 @@ export const BACKGROUD_CONF={
     knockout:{
         max: 5,
         speed: 5
+    },
+    die:{
+        max: 5,
+        speed: 5
     }
 
 }

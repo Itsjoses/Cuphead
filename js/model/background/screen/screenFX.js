@@ -8,6 +8,8 @@ export class ScreenFX extends GameObject{
         this.transform.size.h = 720
         this.sprite = BackgroundSprites.getInstance().screenFX
         this.CURR_CHAR_CONF = CHAR_CONF.screenFX
+        
+        this.GAME.sound.opticalLoopSound()
     }
 
     updateFrame(){

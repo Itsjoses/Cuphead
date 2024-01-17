@@ -9,12 +9,14 @@ export class IntroScreen extends GameObject{
         this.sprite = BackgroundSprites.getInstance().iris
         this.CURR_CHAR_CONF = CHAR_CONF.irisScreen
         this.done = false
+        this.GAME.sound.announcerSound()
     }
 
     updateFrame(){
         const currentSprite = this.sprite[this.tick]
         this.GAME.ctx.drawImage(currentSprite,this.transform.position.x,this.transform.position.y,this.transform.size.w,this.transform.size.h )
         if(this.tick >= this.sprite.length - 1 && this.sprite == BackgroundSprites.getInstance().iris){
+            this.GAME.sound.bellIntroSound()
             this.sprite = BackgroundSprites.getInstance().wallop
             this.CURR_CHAR_CONF = this.CHAR_CONF.wallop
         }

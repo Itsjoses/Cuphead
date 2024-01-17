@@ -14,6 +14,7 @@ export class CupheadHitGroundState extends CupheadState {
         this.oneLoop = false;
         this.cuphead.tick = 0
         this.cuphead.spriteInterval = 0
+        this.sounds.startCupheadHitSound()
     }
 
     updateState() {
@@ -47,6 +48,7 @@ export class CupheadHitGroundState extends CupheadState {
     }
 
     update() {
+        this.cuphead.changePhase()
         this.updateFrame()
         this.updateTransform()
         this.cuphead.changeSprite()

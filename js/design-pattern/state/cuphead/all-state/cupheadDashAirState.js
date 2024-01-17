@@ -15,9 +15,11 @@ export class CupheadDashAirState extends CupheadState {
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashAirSprites()
         this.currentVelocityY = this.cuphead.transform.velocity.y
+        this.sounds.startCupheadDashSound()
     }
 
     updateState() {
+        if(this.cuphead.GAME.stop == true) return;
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
             this.cuphead.controller.dash = false
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)

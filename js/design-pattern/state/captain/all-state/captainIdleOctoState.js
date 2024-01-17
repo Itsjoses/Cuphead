@@ -101,7 +101,7 @@ export class CaptainIdleOctoState extends CaptainState {
     }
 
     updateState() {
-        if(this.captain.hp == 0){
+        if(this.captain.dead == true){
             this.captain.currentState = new CaptainKnockOutState(this.captain)
             return
         }

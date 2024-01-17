@@ -17,7 +17,11 @@ export class ShipSpitsState extends ShipState {
     }
 
     updateState() {
-        if(this.ship.GAME.boss.captain.hp == 0) this.ship.currentState = new ShipIdleState(this.ship)
+        if(this.ship.GAME.boss.captain.hp <= 0){
+            this.ship.currentState = new ShipIdleState(this.ship)
+            return
+        } 
+
         if(this.ship.tick >= this.ship.sprite.length - 9){
             if(this.shootTrue == false){
                 this.ship.GAME.bulletSpawns.push(new ShipBulletSpawn(850,

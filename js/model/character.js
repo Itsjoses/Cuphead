@@ -32,6 +32,7 @@ export class Character extends GameObject{
     }
 
     groundCollision(){
+        if(this.GAME.stop == true) return;
         this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta
         this.transform.position.y += this.transform.velocity.y
         if(this.transform.position.y  > GameSetting.GROUND - this.sprite[this.tick].height){
@@ -43,6 +44,7 @@ export class Character extends GameObject{
     }
 
     wallCollision(){
+        if(this.GAME.stop == true) return;
         if(this.transform.position.x + this.sprite[this.tick].width >= 874){
             this.transform.position.x = 874 - this.sprite[this.tick].width
         }

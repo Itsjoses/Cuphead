@@ -18,6 +18,7 @@ export class CupheadCrouchAttackState extends CupheadState{
     }
 
     updateState(){
+        if(this.cuphead.GAME.stop == true) return;
         const cupheadController = this.cuphead.controller
 
         if(cupheadController.shot == false){
@@ -45,7 +46,6 @@ export class CupheadCrouchAttackState extends CupheadState{
         this.cuphead.transform.size.sizeW = currentSprite.width;
         this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.realPosition.x,this.cuphead.transform.realPosition.y,this.cuphead.transform.size.sizeW,this.cuphead.transform.size.sizeH)
-        this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/4,0,0) 
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getIdle()
@@ -68,18 +68,25 @@ export class CupheadCrouchAttackState extends CupheadState{
             currentSprite.width,
             currentSprite.height
         );
-        this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/4) 
         this.cuphead.GAME.ctx.restore()
     }
 
-    updateFrame(){
+    shot(){
+        if(this.cuphead.GAME.stop == true) return;
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
-        if(this.cuphead.orientation == false) this.frontRender(currentSprite)
-        else this.backRender(currentSprite)
+        const staticIdleSprite = CupheadSprites.getInstace().getIdle()
+        if(this.cuphead.orientation == false){
+        this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/4,0,0) 
+        }else if (this.cuphead.orientation == true){
+            this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/4) 
+
+        }
     }
 
     update(){
         this.updateFrame()
+        this.shot()
+        this.cupheadLoopSound()
         this.updateState()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()

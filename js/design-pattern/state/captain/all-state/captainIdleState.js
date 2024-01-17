@@ -14,7 +14,7 @@ export class CaptainIdleState extends CaptainState {
 
     updateState() {
         if(this.captain.GAME.intro == false) return
-        if(this.captain.hp == 0){
+        if(this.captain.dead == true){
             this.captain.currentState = new CaptainKnockOutState(this.captain)
             return
         }

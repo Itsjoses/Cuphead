@@ -74,12 +74,14 @@ export class CupheadBulletLoop extends GameObject{
     }
 
     transformBullet(){
-        if(this.orientationX == 0) this.transform.position.x += this.speed
-        else this.transform.position.x -= this.speed
+        if(this.GAME.stop == true) return;
+        if(this.orientationX == 0) this.transform.position.x += this.speed 
+        else this.transform.position.x -= this.speed 
         
     }
 
     changeSprite(){
+        if(this.GAME.stop == true) return;
         this.spriteInterval += 60* this.GAME.delta
         if (this.spriteInterval > this.CURR_CHAR_CONF.speed) {
             this.tick += 1;

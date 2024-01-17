@@ -1,3 +1,5 @@
+import { Die } from "../../../../model/background/screen/dieScreen.js";
+import { BACKGROUD_CONF } from "../../../../settings/backgroundSettings.js";
 import { CupheadSprites } from "../../../singleton/cupheadSprite.js";
 import { CupheadState } from "../cupheadState.js";
 import { CupheadDashAirState } from "./cupheadDashAirState.js";
@@ -14,6 +16,7 @@ export class CupheadHitAirState extends CupheadState {
         this.oneLoop = false;
         this.cuphead.tick = 0
         this.cuphead.spriteInterval = 0
+        this.sounds.startCupheadHitSound()
     }
 
     updateState() {
@@ -45,8 +48,8 @@ export class CupheadHitAirState extends CupheadState {
             }
         }
     }
-
     update() {
+        this.cuphead.changePhase()
         this.updateFrame()
         this.updateTransform()
         this.cuphead.changeSprite()

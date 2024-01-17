@@ -37,6 +37,7 @@ export class Cloud {
     }
 
     speed(){
+        if(this.GAME.stop == true) return;
         this.cloud1 -= this.CURR_CHAR_CONF.speedWind * this.GAME.delta
         this.cloud2 -= this.CURR_CHAR_CONF.speedWind * this.GAME.delta
         this.cloud3 -= this.CURR_CHAR_CONF.speedWind * this.GAME.delta

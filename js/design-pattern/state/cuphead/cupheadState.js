@@ -4,9 +4,11 @@ export class CupheadState{
     constructor(cuphead){
         this.cuphead = cuphead
         this.hitSprite = 0
+        this.sounds = this.cuphead.GAME.sound
     }
 
     updateTransform() {
+        if(this.cuphead.GAME.stop == true) return;
         const cupheadController = this.cuphead.controller
         if(this.cuphead.controller.dash == true){
             if(this.cuphead.orientation == true) this.cuphead.transform.position.x -= this.cuphead.CURR_CHAR_CONF.velocityX* this.cuphead.GAME.delta
@@ -74,9 +76,9 @@ export class CupheadState{
         this.cuphead.GAME.ctx.restore();
     }
 
+
     updateFrame(){
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
-        console.log(this.cuphead.controller.hit);
         if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2
         else this.hitSprite = 0
 
@@ -90,4 +92,22 @@ export class CupheadState{
         }
         }
     }
+
+    /**
+     * sound
+     */
+
+    cupheadLoopSound(){
+        if(this.cuphead.GAME.stop == true) return;
+        const cupheadController = this.cuphead.controller
+        if(cupheadController.shot == true){
+            this.sounds.cupheadFireLoopState = true
+            this.sounds.cupheadFireLoop.play()
+        } 
+        else{
+            this.sounds.cupheadFireLoopState = false
+            this.sounds.cupheadFireLoop.pause()
+        } 
+    }
+
 }

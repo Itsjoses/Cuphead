@@ -16,6 +16,7 @@ export class CupheadRunState extends CupheadState {
     }
 
     updateState() {
+        if(this.cuphead.GAME.stop == true) return;
         const cupheadController = this.cuphead.controller
         if (cupheadController.left == false && cupheadController.right == false) {
             this.cuphead.tick = 0

@@ -13,9 +13,12 @@ export class CupheadJumpState extends CupheadState {
         this.cuphead.spriteInterval = 0
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.jump
         this.cuphead.sprite = CupheadSprites.getInstace().getJumpSprites()
+        this.sounds.endCupheadJumpSound()
     }
 
     updateState() {
+        if(this.cuphead.GAME.stop == true) return;
+
         const cupheadController = this.cuphead.controller
         if(cupheadController.hit == "hit"){
             cupheadController.delayHit = true
@@ -28,6 +31,7 @@ export class CupheadJumpState extends CupheadState {
             this.cuphead.currentState = new CupheadDashAirState(this.cuphead,this.cuphead.transform.position.y + this.cuphead.sprite[this.cuphead.tick].height)
         }
         if(cupheadController.jump == false){
+            this.sounds.startCupheadLandSound()
             this.cuphead.tick = 0
             if(cupheadController.left || cupheadController.right){
                 if(cupheadController.shot == true)this.cuphead.currentState = new CupheadRunShotStraightState(this.cuphead)
@@ -51,10 +55,6 @@ export class CupheadJumpState extends CupheadState {
             this.cuphead.transform.position.y,
             currentSprite.width,
             currentSprite.height)
-
-        if(this.cuphead.controller.shot == true){
-            this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/2,0,0) 
-        }
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getIdle()
@@ -67,9 +67,7 @@ export class CupheadJumpState extends CupheadState {
         this.cuphead.GAME.ctx.scale(-1,1)  
         this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
         this.cuphead.GAME.ctx.restore()
-        if(this.cuphead.controller.shot == true){
-            this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/2) 
-        }
+
     }
 
     updateFrame(){
@@ -91,9 +89,25 @@ export class CupheadJumpState extends CupheadState {
         }
     }
 
+    shot(){
+        if(this.cuphead.GAME.stop == true) return;
+        const staticIdleSprite = CupheadSprites.getInstace().getIdle()
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick]
+        if(this.cuphead.controller.shot == true){
+            if(this.cuphead.orientation == false){
+                this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width, this.cuphead.transform.position.y + currentSprite.height/2,0,0) 
+            }else if (this.cuphead.orientation == true){
+                this.cuphead.shootBullet(this.cuphead.transform.position.x + staticIdleSprite[0].width/2,this.cuphead.transform.position.y  + currentSprite.height/2,-staticIdleSprite[0].width/2 + currentSprite.width,-currentSprite.height / 2 + currentSprite.height/2) 
+            }
+        }
+    }
+
     update() {
+        this.cuphead.changePhase()
         this.cuphead.groundCollision()
         this.updateFrame()
+        this.shot()
+        this.cupheadLoopSound()
         this.updateTransform()
         this.cuphead.changeSprite()
         this.cuphead.wallCollision()

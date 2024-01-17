@@ -18,7 +18,10 @@ export class IrisReverse extends GameObject{
             this.tick -= 1;
             this.spriteInterval = 0;
           }
-        if (this.tick <= 0) this.tick = 0;
+        if (this.tick <= 0){
+            this.GAME.pause = true
+            this.tick = 0;
+        } 
     }
 
     updateFrame(){

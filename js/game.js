@@ -1,3 +1,4 @@
+import { Sounds } from "./design-pattern/singleton/sounds.js";
 import { GameSetting } from "./settings/gameSettings.js";
 export class GAME {
     static GAMEINSTANCE = null;
@@ -14,7 +15,7 @@ export class GAME {
         // this.ctx.imageSmoothingEnabled = true;
         // this.ctx.imageSmoothingQuality = 'high';
         this.delta = 0
-        this.lastTime = performance.now();
+        this.lastTime = performance.now()
         this.tempInterval = 0
         this.tempFrameCounter = 0
         this.cuphead = null
@@ -33,6 +34,9 @@ export class GAME {
         this.intro = false
         this.screen = []
         this.pause = false
+        this.stop = false
+        this.deltaArray = [];
+        this.averageDelta = 0
     }
 
     stroke(){
@@ -53,7 +57,7 @@ export class GAME {
 
     getDelta(){
         const currTime = performance.now();
-        const diffDelta = (currTime - this.lastTime) / 1000
+        let diffDelta = (currTime - this.lastTime) / 1000
         this.delta = diffDelta
         this.lastTime = currTime
     }
@@ -95,29 +99,40 @@ export class GAME {
         })
     }
 
+    song(){
+        this.backgroundMusic.loop = true
+        this.backgroundMusic.play()
+    }
+
+    playGame(){
+            
+    }
+
     async render(timestamp){
-  
-  
+        // console.log(this.delta);
+        
+        
         this.getDelta()
         
         if(this.pause == false){
+            this.sound.playBackground()
             this.ctx.clearRect(0, 0, GameSetting.WIDTH, GameSetting.HEIGHT);
-        this.stroke()
-        this.cloudD.update()
-        this.cloudC.update()
-        this.cloudB.update()
-        this.cloudA.update()
-        this.waterD.update()
-        this.waterC.update()
-        this.waterB.update()
-        this.dockA.update()
-        this.cuphead.update()
-        this.boss.update()
-        this.dockB.update()
-        this.bulletRender()
-        this.bulletSpawnRender()
-        this.waterA.update()
-        this.screenFX.update()
+            this.stroke()
+            this.cloudD.update()
+            this.cloudC.update()
+            this.cloudB.update()
+            this.cloudA.update()
+            this.waterD.update()
+            this.waterC.update()
+            this.waterB.update()
+            this.dockA.update()
+            this.cuphead.update()
+            this.boss.update()
+            this.dockB.update()
+            this.bulletRender()
+            this.bulletSpawnRender()
+            this.waterA.update()
+            this.screenFX.update()
         this.gameWave()
         
     }
@@ -129,6 +144,7 @@ export class GAME {
     }
 
     gameWave(){
+        if(this.stop == true) return
         if(this.ebbtide == false) this.waveHeight += (25 * this.delta)
         if(this.ebbtide == true) this.waveHeight -= (25 * this.delta) 
         if(this.waveHeight >= 50) this.ebbtide = true

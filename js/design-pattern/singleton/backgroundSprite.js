@@ -40,16 +40,11 @@ export class BackgroundSprites{
     }
 
     async allScreen(){
-        this.screenFX = await this.spriteRender("../../../asset/Screen FX/cuphead_screen_fx_0",20)
+        this.screenFX = await this.spriteRender("../../../asset/Screen FX/cuphead_screen_fx_0",10)
         this.iris = await this.spriteRender("../../../asset/Screen Narratives/Iris/iris_0",17)
         this.wallop = await this.spriteRender("../../../asset/Screen Narratives/Ready, WALLOP!/FightText_GetReady_0",51)
         this.knockout = await this.spriteSelectedRender("../../../asset/Screen Narratives/A KNOCKOUT/FightText_KO_00",0,26)
-        console.log(this.knockout);
-
-    }
-
-    async iris(){
-        
+        this.die = await this.loadImage("../../../asset/Screen Narratives/You Died/You Died.png")
     }
 
     async renderAllSprites(){

@@ -28,6 +28,7 @@ import { Boss } from "./model/boss.js";
 import { BulletSprite } from "./design-pattern/singleton/bulletSprite.js";
 import { ScreenFX } from "./model/background/screen/screenFX.js";
 import { IntroScreen } from "./model/background/screen/introScreen.js";
+import { Sounds } from "./design-pattern/singleton/sounds.js";
 
 // getInstance
 const game = GAME.getInstace();
@@ -36,6 +37,7 @@ const backgroundSprites = BackgroundSprites.getInstance()
 const captainSprites = CaptainSprites.getInstance()
 const shipSprites = ShipSprites.getInstance()
 const bulletSprites = BulletSprite.getInstance()
+const sounds = Sounds.getInstance()
 
 function canvasInit(){
     game.canvas.width = GameSetting.WIDTH
@@ -43,6 +45,7 @@ function canvasInit(){
 }
 
 function renderSprite(){
+    game.sound = sounds
     game.cuphead = new CupHead(150,1,300,300,1,CUPHEAD_CONF)
     game.waterA = new WaterA(1,740,300,300,1,BACKGROUD_CONF)
     game.screenFX = new ScreenFX(0,0,300,300,1,BACKGROUD_CONF)
@@ -70,6 +73,7 @@ async function play(){
     await captainSprites.renderAllSprites()
     await shipSprites.renderAllSprites()
     await bulletSprites.renderAllSprites()
+    await sounds.renderSong()
     canvasInit()
     renderSprite()
     game.render()

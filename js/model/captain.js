@@ -13,7 +13,7 @@ export class Captain extends Character{
     constructor(x,y,w,h,scale,CHAR_CONF){
         super(x,y,w,h,scale,CHAR_CONF)
         this.currentState = new CaptainLaughState(this)
-        this.hp = 5
+        this.hp = 300
         this.dead = false
     }
 
@@ -30,6 +30,8 @@ export class Captain extends Character{
     changePhase(){
         if(this.hp <= 0){
             if( this.dead == false){
+                this.GAME.cuphead.controller.shot = false
+                this.GAME.sound.cupheadFireLoop.pause()
                 this.dead = true
                 this.GAME.screen.push(new Knockout(0,0,300,300,1,BACKGROUD_CONF))
             }

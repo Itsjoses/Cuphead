@@ -16,6 +16,7 @@ export class CupheadCrouchIdleState extends CupheadState{
     }
 
     updateState(){
+        if(this.cuphead.GAME.stop == true) return;
         const cupheadController = this.cuphead.controller
         if(cupheadController.hit == "hit"){
             cupheadController.delayHit = true

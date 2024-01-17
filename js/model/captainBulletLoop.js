@@ -10,7 +10,7 @@ export class CaptainBulletLoop extends GameObject{
         this.CURR_CHAR_CONF = CHAR_CONF.cupheadLoop
         this.tick = 0
         this.spriteInterval = 0
-        this.speed = GameSetting.CUPHEADBULLETSPEED * this.GAME.delta
+        this.speed = GameSetting.CAPTAINBULLETSPEED * this.GAME.delta
         this.angle = 0
         this.target = {}
         this.getAngle()
@@ -95,12 +95,14 @@ export class CaptainBulletLoop extends GameObject{
     }
 
     transformBullet(){
-       this.transform.position.x -= 10 * Math.cos(this.angle)
-       this.transform.position.y -= 10 * Math.sin(this.angle)
+        if(this.GAME.stop == true) return;
+       this.transform.position.x -= this.speed * Math.cos(this.angle) 
+       this.transform.position.y -= this.speed * Math.sin(this.angle) 
         
     }
 
     changeSprite(){
+        if(this.GAME.stop == true) return;
         this.spriteInterval += 60* this.GAME.delta
         if (this.spriteInterval > this.CURR_CHAR_CONF.speed) {
             this.tick += 1;
@@ -138,6 +140,7 @@ export class CaptainBulletLoop extends GameObject{
         this.removeBullet()
         if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false){
             this.GAME.cuphead.controller.hit = "hit"
+            this.GAME.cuphead.hp -= 1
         } 
     }
 }

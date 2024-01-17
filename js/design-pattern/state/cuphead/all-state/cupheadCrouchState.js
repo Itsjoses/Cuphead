@@ -18,6 +18,7 @@ export class CupheadCrouchState extends CupheadState{
     }
 
     updateState(){
+        if(this.cuphead.GAME.stop == true) return;
         const cupheadController = this.cuphead.controller
         /**
          * state from normal crouch to idle crouch or attack crouch

@@ -48,7 +48,7 @@ export class CupheadRunShotStraightState extends CupheadState{
         this.cuphead.transform.size.sizeW = currentSprite.width;
         this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,this.cuphead.transform.position.x,this.cuphead.transform.position.y,currentSprite.width,currentSprite.height)
-        this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width,this.cuphead.transform.position.y + currentSprite.height/2.2,0,0) 
+
     }
     backRender(currentSprite){
         const staticIdleSprite = CupheadSprites.getInstace().getRunShotStraight()
@@ -60,15 +60,13 @@ export class CupheadRunShotStraightState extends CupheadState{
         this.cuphead.transform.size.sizeW = currentSprite.width;
         this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(currentSprite,-staticIdleSprite[0].width/2,-currentSprite.height / 2,currentSprite.width,currentSprite.height)
-        this.cuphead.shootBullet(
-            this.cuphead.transform.position.x + staticIdleSprite[0].width/2,
-            this.cuphead.transform.position.y  + currentSprite.height/2,
-            -staticIdleSprite[0].width/2 + currentSprite.width,
-            -currentSprite.height / 2 + currentSprite.height/2.2) 
+
         this.cuphead.GAME.ctx.restore()
     }
 
     updateFrame(){
+        if(this.cuphead.GAME.stop == true) return;
+
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
 
         if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2
@@ -87,8 +85,25 @@ export class CupheadRunShotStraightState extends CupheadState{
 
     }
 
+    shot(){
+        if(this.cuphead.GAME.stop == true) return;
+        const staticIdleSprite = CupheadSprites.getInstace().getRunShotStraight()
+        const currentSprite = this.cuphead.sprite[this.cuphead.tick]
+        if(this.cuphead.orientation == false){
+            this.cuphead.shootBullet(this.cuphead.transform.position.x + currentSprite.width,this.cuphead.transform.position.y + currentSprite.height/2.2,0,0) 
+        }else if (this.cuphead.orientation == true){
+            this.cuphead.shootBullet(
+                this.cuphead.transform.position.x + staticIdleSprite[0].width/2,
+                this.cuphead.transform.position.y  + currentSprite.height/2,
+                -staticIdleSprite[0].width/2 + currentSprite.width,
+                -currentSprite.height / 2 + currentSprite.height/2.2) 
+        }
+    }
+
     update(){
         this.updateFrame()
+        this.shot()
+        this.cupheadLoopSound()
         this.updateTransform()
         this.cuphead.changeSprite()
         this.cuphead.groundCollision()

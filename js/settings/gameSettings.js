@@ -5,6 +5,7 @@ export class GameSetting {
     static GRAVITY = 70
     static JUMP = -1800
     static CUPHEADBULLETSPEED = 1500
+    static CAPTAINBULLETSPEED = 700
     static CUPHEADBULLETSPAWN = 150
 
     /**

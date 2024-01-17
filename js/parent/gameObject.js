@@ -14,6 +14,7 @@ export class GameObject {
     }
     
     changeSprite(){
+        if(this.GAME.stop == true) return;
         this.spriteInterval += 60* this.GAME.delta
         if (this.spriteInterval > this.CURR_CHAR_CONF.speed) {
             this.tick += 1;

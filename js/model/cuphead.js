@@ -1,8 +1,10 @@
 import { CupheadSprites } from "../design-pattern/singleton/cupheadSprite.js";
 import { CupheadIdleState } from "../design-pattern/state/cuphead/all-state/cupheadIdleState.js";
 import { CupheadIntroState } from "../design-pattern/state/cuphead/all-state/cupheadIntroState.js";
+import { BACKGROUD_CONF } from "../settings/backgroundSettings.js";
 import { BULLET_CONF } from "../settings/bulletSettings.js";
 import { GameSetting } from "../settings/gameSettings.js";
+import { Die } from "./background/screen/dieScreen.js";
 import { Character } from "./character.js";
 import { CupheadBulletLoop } from "./cupheadBulletLoop.js";
 import { CupheadBulletSpawn } from "./cupheadBulletSpawn.js";
@@ -14,10 +16,11 @@ export class CupHead extends Character{
         this.bulletSpawnInterval = GameSetting.CUPHEADBULLETSPAWN; // Set the desired interval in milliseconds (1 second in this example)
         this.delayHitTime = Date.now(); // Initialize the last bullet spawn time
         this.delayHitInterval = 3000; // Set the desired interval in milliseconds (1 second in this example)
+        this.hp = 3
+        this.dead = false
     }
 
     delayHitReset(){
-        console.log();
         if(this.controller.hit == "delay"){
             const currentTime = Date.now();
             if (currentTime - this.delayHitTime >= this.delayHitInterval) {
@@ -27,8 +30,16 @@ export class CupHead extends Character{
         }
     }
 
-    die(){
-     
+    changePhase(){
+        if(this.hp <= 0){
+            if( this.dead == false){
+                this.GAME.sound.disableAllSong()
+                this.GAME.sound.startCupheadDeathSound()
+                this.dead = true
+                this.GAME.stop = true
+                this.GAME.screen.push(new Die(0,0,1,BACKGROUD_CONF))
+            }
+        }
     }
 
     updateFrame(){

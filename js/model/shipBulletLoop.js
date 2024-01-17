@@ -10,7 +10,7 @@ export class ShipBulletLoop extends GameObject{
         this.CURR_CHAR_CONF = CHAR_CONF.cupheadLoop
         this.tick = 0
         this.spriteInterval = 0
-        this.speed = GameSetting.CUPHEADBULLETSPEED * this.GAME.delta
+        this.speed = GameSetting.CAPTAINBULLETSPEED * this.GAME.delta
         this.angle = 0
         this.target = {}
     }
@@ -76,10 +76,12 @@ export class ShipBulletLoop extends GameObject{
     }
 
     transformBullet(){
-       this.transform.position.x -= 10
+        if(this.GAME.stop == true) return;
+       this.transform.position.x -= this.speed 
     }
 
     changeSprite(){
+        if(this.GAME.stop == true) return;
         this.spriteInterval += 60* this.GAME.delta
         if (this.spriteInterval > this.CURR_CHAR_CONF.speed) {
             this.tick += 1;
@@ -117,6 +119,7 @@ export class ShipBulletLoop extends GameObject{
         this.removeBullet()
         if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false  ){
             this.GAME.cuphead.controller.hit = "hit"
+            this.GAME.cuphead.hp -= 1
         } 
     }
 }
