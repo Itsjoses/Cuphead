@@ -77,6 +77,7 @@ export class CupheadShotStraightState extends CupheadState{
     }
 
     updateFrame(){
+        this.cuphead.invincibleDelay()
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
 
         if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2

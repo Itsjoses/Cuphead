@@ -38,6 +38,12 @@ export class Sounds {
         this.knockoutBoom= await this.loadSong("./../../../asset/Sounds/Misc/knockout_boom_01.wav")
         this.announcer= await this.loadSong("./../../../asset/Sounds/Announcer/announcer_0001_b.wav")
         this.announcerKnockout= await this.loadSong("./../../../asset/Sounds/Announcer/announcer_knockout_0004.wav")
+
+        this.captainGunStart = await this.loadSong("./../../../asset/Sounds/Captain/pirate_gun_start.wav")
+        this.captainGunEnd = await this.loadSong("./../../../asset/Sounds/Captain/pirate_gun_end.wav")
+        this.captainGunShoot = await this.loadSong("./../../../asset/Sounds/Captain/pirate_gun_shoot_04.wav")
+        this.captainLaugh = await this.loadSong("./../../../asset/Sounds/Captain/pirate_laugh_01.wav")
+
         this.backGroundMusic.volume = .5
     }
 

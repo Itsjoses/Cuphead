@@ -78,6 +78,7 @@ export class CupheadState{
 
 
     updateFrame(){
+        this.cuphead.invincibleDelay()
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
         if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2
         else this.hitSprite = 0
@@ -90,6 +91,15 @@ export class CupheadState{
                 if(this.cuphead.orientation == false) this.frontRender(currentSprite)
                 else this.backRender(currentSprite)
         }
+        }
+    }
+
+    invincibleDelay(){
+        if(this.cuphead.invincible == false){
+            this.cuphead.invincible = true
+            setTimeout(() => {
+                this.cuphead.invincible = false
+            }, 3000); // 2000 milliseconds = 2 seconds
         }
     }
 

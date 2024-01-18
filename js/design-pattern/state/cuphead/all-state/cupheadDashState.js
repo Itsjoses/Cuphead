@@ -13,6 +13,7 @@ export class CupheadDashState extends CupheadState {
         this.cuphead.CURR_CHAR_CONF = this.cuphead.CHAR_CONF.dash
         this.cuphead.sprite = CupheadSprites.getInstace().getDashSprites()
         this.sounds.startCupheadDashSound()
+        this.cuphead.invincibleToggle()
     }
 
     updateState() {

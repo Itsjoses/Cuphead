@@ -11,6 +11,7 @@ export class CaptainPickOctoState extends CaptainState {
         this.captain.CURR_CHAR_CONF = this.captain.CHAR_CONF.pickOcto
         this.captain.sprite = CaptainSprites.getInstance().pickOctoCaptain
         this.captain.topSprite = CaptainSprites.getInstance().pickOctoTopCaptain
+        this.captain.GAME.sound.captainGunStart.play()
         this.spriteBoundry ={
             0:{
                 x:0,

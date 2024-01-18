@@ -18,6 +18,9 @@ export class CupHead extends Character{
         this.delayHitInterval = 3000; // Set the desired interval in milliseconds (1 second in this example)
         this.hp = 3
         this.dead = false
+        this.invincible = false
+        this.invincibleTime = 0
+        this.invincibleTimeInterval = 3000
     }
 
     delayHitReset(){
@@ -66,5 +69,19 @@ export class CupHead extends Character{
 
     update(){
         this.currentState.update()
+    }
+
+    invincibleDelay(){
+        if(this.invincible == true){
+            const currentTime = Date.now();
+            if (currentTime - this.invincibleTime >= this.invincibleTimeInterval) {
+                this.invincible = false
+            }
+        }
+    }
+
+    invincibleToggle(){
+        this.invincibleTime = new Date()
+        this.invincible = true
     }
 }

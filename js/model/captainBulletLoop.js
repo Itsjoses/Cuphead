@@ -138,7 +138,7 @@ export class CaptainBulletLoop extends GameObject{
         this.transformBullet()
         this.changeSprite()
         this.removeBullet()
-        if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false){
+        if(this.rectangleCircleCollision() == true && this.GAME.cuphead.controller.hit == "idle" && this.GAME.cuphead.controller.dash == false && this.GAME.cuphead.invincible == false ){
             this.GAME.cuphead.controller.hit = "hit"
             this.GAME.cuphead.hp -= 1
         } 

@@ -11,6 +11,7 @@ export class CaptainLaughState extends CaptainState {
         this.captain.spriteInterval = 0
         this.captain.CURR_CHAR_CONF = this.captain.CHAR_CONF.laugh
         this.captain.sprite = CaptainSprites.getInstance().laughCaptain
+        this.captain.GAME.sound.captainLaugh.play()
      }
 
     updateState() {

@@ -16,6 +16,7 @@ export class CupheadDashAirState extends CupheadState {
         this.cuphead.sprite = CupheadSprites.getInstace().getDashAirSprites()
         this.currentVelocityY = this.cuphead.transform.velocity.y
         this.sounds.startCupheadDashSound()
+        this.cuphead.invincibleToggle()
     }
 
     updateState() {

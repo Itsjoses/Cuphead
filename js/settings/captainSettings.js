@@ -25,7 +25,7 @@ export const CAPTAIN_CONF = {
     },
     laugh:{
         max:5,
-        speed:7
+        speed:13
     },
     knockOut:{
         max:5,

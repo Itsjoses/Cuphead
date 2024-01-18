@@ -65,6 +65,7 @@ export class CupheadRunShotStraightState extends CupheadState{
     }
 
     updateFrame(){
+        this.cuphead.invincibleDelay()
         if(this.cuphead.GAME.stop == true) return;
 
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]

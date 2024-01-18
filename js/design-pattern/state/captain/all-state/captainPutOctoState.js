@@ -73,6 +73,7 @@ export class CaptainPutOctoState extends CaptainState {
             return
         }
         if(this.captain.tick >= this.captain.sprite.length - 1){
+            this.captain.GAME.sound.captainGunEnd.play()
             this.captain.currentState = new CaptainIdleState(this.captain)
         }
     }

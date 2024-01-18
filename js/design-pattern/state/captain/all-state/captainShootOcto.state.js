@@ -16,6 +16,7 @@ export class CaptainShootOctoState extends CaptainState {
         this.captain.topSprite = CaptainSprites.getInstance().shootOctoTopCaptain
         this.shootTrue = false
         this.shootCount = 0
+        this.captain.GAME.sound.captainGunShoot.play()
         this.spriteBoundry = {
             0: {
                 x: 0,
