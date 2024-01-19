@@ -48,17 +48,17 @@ export class ShipSpitsState extends ShipState {
         const currentSprite = this.ship.sprite[this.ship.tick]
         const ctx = this.ship.GAME.ctx;
         
-        // Draw a rectangle around the character (adjust dimensions as needed)
-        ctx.beginPath();
-        ctx.strokeStyle = 'red'; // Set the stroke color
-        ctx.lineWidth = 2; // Set the line width 
-        ctx.rect(
-            850,
-            550,
-            30,
-            30
-        );
-        ctx.stroke();
+        // // Draw a rectangle around the character (adjust dimensions as needed)
+        // ctx.beginPath();
+        // ctx.strokeStyle = 'red'; // Set the stroke color
+        // ctx.lineWidth = 2; // Set the line width 
+        // ctx.rect(
+        //     850,
+        //     550,
+        //     30,
+        //     30
+        // );
+        // ctx.stroke();
     }
 
     update() {

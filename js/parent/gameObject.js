@@ -24,7 +24,7 @@ export class GameObject {
     }
 
     Collision(source,target){
-        if(source.transform.realPosition.x + source.transform.size.sizeW  >= target.transform.realPosition.x &&
+        if(source.transform.realPosition.x + source.transform.size.sizeW  >= (target.transform.realPosition.x + target.transform.size.sizeW/2) &&
             source.transform.realPosition.x <= target.transform.realPosition.x + target.transform.size.sizeW &&
             source.transform.realPosition.y + source.transform.size.sizeH  >= target.transform.realPosition.y &&
             source.transform.realPosition.y <= target.transform.realPosition.y + target.transform.size.sizeH){

@@ -38,13 +38,13 @@ export class CupheadState{
         const ctx = this.cuphead.GAME.ctx;
         
         // Draw a rectangle around the character (adjust dimensions as needed)
-        ctx.beginPath();
-        ctx.strokeStyle = 'red'; // Set the stroke color
-        ctx.lineWidth = 2; // Set the line width 
-        ctx.rect(
-            this.cuphead.transform.realPosition.x,this.cuphead.transform.realPosition.y,this.cuphead.transform.size.sizeW,this.cuphead.transform.size.sizeH
-        );
-        ctx.stroke();
+        // ctx.beginPath();
+        // ctx.strokeStyle = 'red'; // Set the stroke color
+        // ctx.lineWidth = 2; // Set the line width 
+        // ctx.rect(
+        //     this.cuphead.transform.realPosition.x + this.cuphead.transform.size.sizeW/6,this.cuphead.transform.realPosition.y + this.cuphead.transform.size.sizeH/6,this.cuphead.transform.size.sizeW/3,this.cuphead.transform.size.sizeH/3
+        // );
+        // ctx.stroke();
         // console.log(this.cuphead.transform.position.x);
     }
     backRender(currentSprite) {
@@ -78,6 +78,7 @@ export class CupheadState{
 
 
     updateFrame(){
+        console.log(this.cuphead.invincible);
         this.cuphead.invincibleDelay()
         const currentSprite = this.cuphead.sprite[this.cuphead.tick]
         if(this.cuphead.controller.hit == "hit" || this.cuphead.controller.hit == "delay" ) this.hitSprite = 2

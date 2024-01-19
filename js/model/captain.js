@@ -29,6 +29,7 @@ export class Captain extends Character{
 
     changePhase(){
         if(this.hp <= 0){
+            this.GAME.cuphead.invincible = true
             if( this.dead == false){
                 this.GAME.cuphead.controller.shot = false
                 this.GAME.sound.cupheadFireLoop.pause()

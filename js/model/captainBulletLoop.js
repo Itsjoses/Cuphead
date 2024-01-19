@@ -30,12 +30,40 @@ export class CaptainBulletLoop extends GameObject{
         this.angle = Math.atan2(deltaY, deltaX);
     }
 
-    rectangleCircleCollision() {
-        this.target={
-            x: this.GAME.cuphead.transform.realPosition.x ,
-            y: this.GAME.cuphead.transform.realPosition.y ,
+    rectangleVerticalCollision() {
+        this.target = {
+            x: this.GAME.cuphead.transform.realPosition.x,
+            y: this.GAME.cuphead.transform.realPosition.y,
             w: this.GAME.cuphead.transform.size.sizeW,
             h: this.GAME.cuphead.transform.size.sizeH
+        };
+    
+        // Only consider the width for the rectangle's collision
+        const circleLocalX = (this.transform.position.x - 10) - (this.target.x + this.target.w / 2);
+        const circleLocalY = this.transform.position.y - (this.target.y + this.target.h / 2);
+    
+        // Rotate the circle back to the rectangle's orientation
+        const rotatedX = circleLocalX * Math.cos(this.angle) - circleLocalY * Math.sin(this.angle);
+        const rotatedY = circleLocalX * Math.sin(this.angle) + circleLocalY * Math.cos(this.angle);
+    
+        // Closest point in the rectangle to the circle
+        let closestX = Math.max(-this.target.w / 2, Math.min(rotatedX, this.target.w / 2));
+        let closestY = Math.max(-this.target.h / 2, Math.min(rotatedY, this.target.h / 2));
+    
+        // Check if the distance between the circle and the closest point in the rectangle is less than the circle's radius
+        const distanceX = rotatedX - closestX;
+        const distanceY = rotatedY - closestY;
+        const distanceSquared = distanceX * distanceX + distanceY * distanceY;
+    
+        return distanceSquared <= 15 * 15; // Adjust the radius as needed
+    }
+
+    rectangleCircleCollision() {
+        this.target={
+            x: this.GAME.cuphead.transform.realPosition.x + this.GAME.cuphead.transform.size.sizeW/6,
+            y: this.GAME.cuphead.transform.realPosition.y + this.GAME.cuphead.transform.size.sizeH/6 ,
+            w: this.GAME.cuphead.transform.size.sizeW/1.5,
+            h: this.GAME.cuphead.transform.size.sizeH/1.5
         } 
         // Convert the circle position to the rectangle's local coordinates
         const circleLocalX = (this.transform.position.x - 10) - (this.target.x + this.target.w / 2);
@@ -84,10 +112,6 @@ export class CaptainBulletLoop extends GameObject{
             this.transform.size.sizeW,
             this.transform.size.sizeH
         );
-        this.GAME.ctx.beginPath();
-        this.GAME.ctx.arc(-10, 0, 15, 0, 2 * Math.PI);
-        this.GAME.ctx.strokeStyle = 'red';
-        this.GAME.ctx.stroke();
     
         // Restore the canvas state to prevent affecting subsequent drawings
         this.GAME.ctx.restore();

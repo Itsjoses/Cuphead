@@ -17,10 +17,10 @@ export class ShipBulletLoop extends GameObject{
 
     rectangleCircleCollision() {
         this.target={
-            x: this.GAME.cuphead.transform.realPosition.x ,
-            y: this.GAME.cuphead.transform.realPosition.y ,
-            w: this.GAME.cuphead.transform.size.sizeW,
-            h: this.GAME.cuphead.transform.size.sizeH
+            x: this.GAME.cuphead.transform.realPosition.x + this.GAME.cuphead.transform.size.sizeW/6,
+            y: this.GAME.cuphead.transform.realPosition.y + this.GAME.cuphead.transform.size.sizeH/6 ,
+            w: this.GAME.cuphead.transform.size.sizeW/1.5,
+            h: this.GAME.cuphead.transform.size.sizeH/1.5
         } 
         // Convert the circle position to the rectangle's local coordinates
         const circleLocalX = (this.transform.position.x - 47) - (this.target.x + this.target.w / 2);
@@ -67,9 +67,6 @@ export class ShipBulletLoop extends GameObject{
             this.transform.size.sizeH
         );
         this.GAME.ctx.beginPath();
-        this.GAME.ctx.arc(-47, 0, 45, 0, 2 * Math.PI);
-        this.GAME.ctx.strokeStyle = 'red';
-        this.GAME.ctx.stroke();
     
         // Restore the canvas state to prevent affecting subsequent drawings
         this.GAME.ctx.restore();

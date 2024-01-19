@@ -18,11 +18,8 @@ export class CupheadDashState extends CupheadState {
 
     updateState() {
         if(this.cuphead.GAME.stop == true) return;
-        // console.log("ini position x :",this.cuphead.transform.position.x,"ini width canvas :", this.cuphead.sprite[this.cuphead.tick].width);
         if(this.cuphead.tick >= this.cuphead.sprite.length -1){
-            // console.log("masuk ke idle");
             this.cuphead.controller.dash = false
-            // console.log("ini udah false",this.cuphead.controller.dash );
             this.cuphead.currentState = new CupheadIdleState(this.cuphead)
             
         }
@@ -31,37 +28,25 @@ export class CupheadDashState extends CupheadState {
     frontRender(){
         const currentSprite =  this.cuphead.sprite[this.cuphead.tick]
         const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle()
-        this.cuphead.transform.realPosition.x = 0;
-        this.cuphead.transform.realPosition.y = 0;
-        this.cuphead.transform.size.sizeW = 0;
-        this.cuphead.transform.size.sizeH = 0;
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(
             currentSprite,
             this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
             this.cuphead.transform.position.y,currentSprite.width,
             currentSprite.height)
-        const ctx = this.cuphead.GAME.ctx;
-        
-        // Draw a rectangle around the character (adjust dimensions as needed)
-        ctx.beginPath();
-        ctx.strokeStyle = 'red'; // Set the stroke color
-        ctx.lineWidth = 2; // Set the line width 
-        ctx.rect(
-            this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
-            this.cuphead.transform.position.y,currentSprite.width,
-            currentSprite.height
-        );
-        ctx.stroke();
     }
 
     backRender() {
         const currentSprite = this.cuphead.sprite[this.cuphead.tick];
-        const staticIdleSprite = CupheadSprites.getInstace().getIdle();
+        const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle();
         const ctx = this.cuphead.GAME.ctx;
-        this.cuphead.transform.realPosition.x = 0;
-        this.cuphead.transform.realPosition.y = 0;
-        this.cuphead.transform.size.sizeW = 0;
-        this.cuphead.transform.size.sizeH = 0;
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         ctx.save();
         ctx.translate(
             this.cuphead.transform.position.x + currentSprite.width/2,
@@ -75,20 +60,6 @@ export class CupheadDashState extends CupheadState {
             currentSprite.width,
             currentSprite.height
         );
-        // const rectWidth = currentSprite.width;
-        // const rectHeight = currentSprite.height;
-        
-        // // Draw a rectangle around the character (adjust dimensions as needed)
-        // ctx.beginPath();
-        // ctx.strokeStyle = 'red'; // Set the stroke color
-        // ctx.lineWidth = 2; // Set the line width 
-        // ctx.rect(
-        //     -(currentSprite.width/2),   // Adjusted this line
-        //     -rectHeight / 2,
-        //     rectWidth,
-        //     rectHeight
-        // );
-        // ctx.stroke();
         ctx.restore();
     }
 

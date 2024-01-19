@@ -30,6 +30,10 @@ export class CupheadDashAirState extends CupheadState {
     frontRender(){
         const currentSprite =  this.cuphead.sprite[this.cuphead.tick]
         const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle()
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         this.cuphead.GAME.ctx.drawImage(
             currentSprite,
             this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width,
@@ -39,8 +43,12 @@ export class CupheadDashAirState extends CupheadState {
 
     backRender() {
         const currentSprite = this.cuphead.sprite[this.cuphead.tick];
-        const staticIdleSprite = CupheadSprites.getInstace().getIdle();
+        const currentStaticIdleSprite = CupheadSprites.getInstace().getIdle();
         const ctx = this.cuphead.GAME.ctx;
+        this.cuphead.transform.realPosition.x = this.cuphead.transform.position.x - currentSprite.width + currentStaticIdleSprite[0].width;
+        this.cuphead.transform.realPosition.y = this.cuphead.transform.position.y;
+        this.cuphead.transform.size.sizeW = currentSprite.width;
+        this.cuphead.transform.size.sizeH = currentSprite.height;
         ctx.save();
         ctx.translate(
             this.cuphead.transform.position.x + currentSprite.width/2,

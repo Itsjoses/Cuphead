@@ -20,7 +20,7 @@ export class CupHead extends Character{
         this.dead = false
         this.invincible = false
         this.invincibleTime = 0
-        this.invincibleTimeInterval = 3000
+        this.invincibleTimeInterval = 2000
     }
 
     delayHitReset(){
