@@ -15,7 +15,7 @@ export class GAME {
         // this.ctx.imageSmoothingEnabled = true;
         // this.ctx.imageSmoothingQuality = 'high';
         this.delta = 0
-        this.lastTime = performance.now()
+        this.lastTime = new Date()
         this.tempInterval = 0
         this.tempFrameCounter = 0
         this.cuphead = null
@@ -36,6 +36,7 @@ export class GAME {
         this.pause = false
         this.stop = false
         this.deltaArray = [];
+        this.deltaStatic = 0
         this.averageDelta = 0
     }
 
@@ -56,10 +57,25 @@ export class GAME {
     }
 
     getDelta(){
-        const currTime = performance.now();
+        const currTime = new Date();
         let diffDelta = (currTime - this.lastTime) / 1000
+        console.log(this.deltaStatic);
+        if (this.deltaStatic == 0 && this.deltaArray[this.delta] >= 100) {
+            this.deltaStatic = this.delta
+        }else if(this.deltaStatic == 0){
+                    // Check if deltaIndex exists in the array, if not, initialize it to 0
+            if (this.deltaArray[this.delta] === undefined) {
+                this.deltaArray[this.delta] = 0;
+            }
+
+                // Increment the value at the this.delta
+            this.deltaArray[this.delta] += 1;
+        }
+
+        if(this.deltaStatic != 0) diffDelta = this.deltaStatic
         this.delta = diffDelta
         this.lastTime = currTime
+
     }
 
     removeBulletLoop(bulletLoop) {
