@@ -1,3 +1,0 @@
-# Contoh pengalihan dari / ke /html/index.html
-RewriteEngine On
-RewriteRule ^$ /html/index.html [L,R=301]
