@@ -147,8 +147,14 @@ export class GAME {
         if(this.stop == true) return
         if(this.ebbtide == false) this.waveHeight += (25 * this.delta)
         if(this.ebbtide == true) this.waveHeight -= (25 * this.delta) 
-        if(this.waveHeight >= 50) this.ebbtide = true
-        if(this.waveHeight <= 0) this.ebbtide = false
+        if(this.waveHeight >= 50){
+            this.waveHeight = 50
+            this.ebbtide = true
+        }
+        if(this.waveHeight <= 0){
+            this.waveHeight = 0
+            this.ebbtide = false
+        } 
     }
 
 }
