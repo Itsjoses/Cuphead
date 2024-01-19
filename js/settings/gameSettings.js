@@ -2,8 +2,8 @@ export class GameSetting {
     static WIDTH = 1280
     static HEIGHT = 720
     static GROUND = 635
-    static GRAVITY = 70
-    static JUMP = -30
+    static GRAVITY = 35
+    static JUMP = 1400
     static CUPHEADBULLETSPEED = 1500
     static CAPTAINBULLETSPEED = 700
     static CUPHEADBULLETSPAWN = 150

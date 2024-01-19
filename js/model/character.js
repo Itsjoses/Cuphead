@@ -16,12 +16,15 @@ export class Character extends GameObject{
             dash: false,
             hit: "idle",
         }
+        this.jumpHit = false
     }
 
     jump(){
         if(this.controller.jump == false && this.controller.dash == false){
-            this.transform.velocity.y = GameSetting.JUMP
-            this.controller.jump = true
+            this.controller.jump = true;
+            this.transform.velocity.y = 0
+            this.transform.velocity.y -= GameSetting.JUMP * this.GAME.delta
+            this.jumpHit = true
         }
     }
 
@@ -32,15 +35,34 @@ export class Character extends GameObject{
     }
 
     groundCollision(){
-        if(this.GAME.stop == true) return;
-        this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta
-        this.transform.position.y += this.transform.velocity.y 
-        if(this.transform.position.y  > GameSetting.GROUND - this.sprite[this.tick].height){
-            this.transform.position.y = GameSetting.GROUND -  this.sprite[this.tick].height
-            this.controller.jump = false
-        } 
-        else this.transform.position.y = this.transform.position.y
+        if (this.GAME.stop === true) return;
+        if(this.controller.jump == true){
+            
+            if(this.transform.position.y >= 100 && this.jumpHit == true){
+                
+            }else{
+                if(this.jumpHit == true)this.transform.velocity.y = -(GameSetting.JUMP/4 * this.GAME.delta)
+                console.log("kena");
+                this.jumpHit = false
+                this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta;
+            }
+        }else{
+            console.log("kena");
+            this.transform.velocity.y += GameSetting.GRAVITY * this.GAME.delta;
+        }
+
+      
+        // Update position based on velocity and delta time
+        this.transform.position.y += this.transform.velocity.y ;
+
+        // Check collision with the ground
+        if (this.transform.position.y > GameSetting.GROUND - this.sprite[this.tick].height) {
+            this.transform.position.y = GameSetting.GROUND - this.sprite[this.tick].height;
+            this.controller.jump = false;
+        }
         if(this.transform.velocity.y <= 0) this.controller.jump = true
+
+        console.log(this.transform.velocity.y);
     }
 
     wallCollision(){
